@@ -1,0 +1,93 @@
+<div class="box-body">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Sobrenome</th>
+                    <th>Dt. Nascimento</th>
+                    <th>Endereço</th>
+                    <th>Bairro</th>
+                    <th>Cidade</th>
+                    <th>Estado</th>
+                    <th>Profissao</th>
+                    <th>E-mail</th>
+                    <th>Telefone</th>
+                    <th>Indicação</th>               
+                    <th>Responsável</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="paciente in bcCtrl.paciente">
+                    <td>{{:: paciente.nome }}</td>
+                    <td>{{:: paciente.sobrenome }}</td>
+                    <td>{{:: paciente.dt_nascimento }}</td>
+                    <td>{{:: paciente.endereco }}</td>
+                    <td>{{:: paciente.bairro }}</td>
+                    <td>{{:: paciente.cidade }}</td>
+                    <td>{{:: paciente.estado }}</td>
+                    <td>{{:: paciente.profissao }}</td>
+                    <td>{{:: paciente.email }}</td>
+                    <td>{{:: paciente.telefone }}</td>
+                    <td>{{:: paciente.indicacao }}</td>
+                    <td>{{:: paciente.responsavel }}</td>
+                    <td class="table-actions">
+                        <button class="btn btn-warning" ng-click="bcCtrl.showTabUpdate(paciente)">
+                            <i class="fa fa-pencil"></i>
+                        </button>
+                        <button class="btn btn-danger" ng-click="bcCtrl.showTabDelete(paciente)">
+                            <i class="fa fa-trash-o"></i>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="box-footer clearfix">
+            <paginator url="/#!/pacientes" pages="{{ bcCtrl.pages }}"></paginator>
+        </div>
+    </div><div class="box-body">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Sobrenome</th>
+                <th>Dt. Nascimento</th>
+                <th>Endereço</th>
+                <th>Bairro</th>
+                <th>Cidade</th>
+                <th>Estado</th>
+                <th>Profissao</th>
+                <th>E-mail</th>
+                <th>Telefone</th>
+                <th>Indicação</th>               
+                <th>Responsável</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="paciente in bcCtrl.paciente">
+                <td>{{:: paciente.nome }}</td>
+                <td>{{:: paciente.sobrenome }}</td>
+                <td>{{:: paciente.dt_nascimento }}</td>
+                <td>{{:: paciente.endereco }}</td>
+                <td>{{:: paciente.bairro }}</td>
+                <td>{{:: paciente.cidade }}</td>
+                <td>{{:: paciente.estado }}</td>
+                <td>{{:: paciente.profissao }}</td>
+                <td>{{:: paciente.email }}</td>
+                <td>{{:: paciente.telefone }}</td>
+                <td>{{:: paciente.indicacao }}</td>
+                <td>{{:: paciente.responsavel }}</td>
+                <td class="table-actions">
+                    <button class="btn btn-warning" ng-click="bcCtrl.showTabUpdate(paciente)">
+                        <i class="fa fa-pencil"></i>
+                    </button>
+                    <button class="btn btn-danger" ng-click="bcCtrl.showTabDelete(paciente)">
+                        <i class="fa fa-trash-o"></i>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="box-footer clearfix">
+        <paginator url="/#!/pacientes" pages="{{ bcCtrl.pages }}"></paginator>
+    </div>
+</div>
