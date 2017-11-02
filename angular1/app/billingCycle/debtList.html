@@ -11,26 +11,43 @@
     <tbody>
       <tr ng-repeat="debt in billingCycle.debts">
         <td>
-          <input ng-model="debt.name" class="form-control" placeholder="Informe o Nome"
-            ng-readonly="tabDelete" />
+          <input ng-model="debt.name" class="form-control" placeholder="Informe o Nome" ng-readonly="tabDelete" />
         </td>
         <td>
-          <input ng-model="debt.value" class="form-control" placeholder="Informe a Valor"
-            ng-readonly="tabDelete" ng-change="calculateValues()" type="number" />
+          <input ng-model="debt.value" class="form-control" placeholder="Informe a Valor" ng-readonly="tabDelete" ng-change="calculateValues()"
+            type="number" />
         </td>
         <td>
-          <input ng-model="debt.status" class="form-control" placeholder="Informe o Status"
-            ng-readonly="tabDelete" />
+          <!--input ng-model="debt.status" class="form-control"/-->
+          <select class="form-control select2 select2-hidden-accessible" class="form-control" model="debt.status" tabindex="-1" aria-hidden="true"
+            ng-readonly="tabDelete">
+            <option disabled selected="selected">SELECIONE</option>
+            <option>PAGO</option>
+            <option>AGENDADO</option>
+            <option>PENDENTE</option>
+          </select>
         </td>
         <td style="width:150px;" ng-if="!tabDelete">
-          <button class="btn btn-success" ng-click="addDebt($index)"><i class="fa fa-plus"></i></button>
-          <button class="btn btn-warning" ng-click="cloneDebt($index,debt)"><i class="fa fa-clone"></i></button>
-          <button class="btn btn-danger" ng-click="deleteDebt($index)"><i class="fa fa-trash-o"></i></button>
+          <button class="btn btn-success" ng-click="addDebt($index)">
+            <i class="fa fa-plus"></i>
+          </button>
+          <button class="btn btn-warning" ng-click="cloneDebt($index,debt)">
+            <i class="fa fa-clone"></i>
+          </button>
+          <button class="btn btn-danger" ng-click="deleteDebt($index)">
+            <i class="fa fa-trash-o"></i>
+          </button>
         </td>
         <td style="width:150px;" ng-if="tabDelete">
-          <button class="btn btn-success disabled"><i class="fa fa-plus"></i></button>
-          <button class="btn btn-warning disabled"><i class="fa fa-clone"></i></button>
-          <button class="btn btn-danger disabled"><i class="fa fa-trash-o"></i></button>
+          <button class="btn btn-success disabled">
+            <i class="fa fa-plus"></i>
+          </button>
+          <button class="btn btn-warning disabled">
+            <i class="fa fa-clone"></i>
+          </button>
+          <button class="btn btn-danger disabled">
+            <i class="fa fa-trash-o"></i>
+          </button>
         </td>
       </tr>
     </tbody>

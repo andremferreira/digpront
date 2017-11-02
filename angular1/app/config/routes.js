@@ -6,10 +6,13 @@ angular.module('primeiraApp').config([
     $stateProvider.state('welcome', {
       url: "/welcome",
       templateUrl: "welcome/welcome.html"
-    })/*.state('billingCycle', {
+    }).state('billingCycle', {
       url: "/billingCycles?page",
       templateUrl: "billingCycle/tabs.html"
-    })*/.state('pacientes', {
+    }).state('dashboard', {
+      url: "/dashboard?page",
+      templateUrl: "dashboard/tabs.html"
+    }).state('pacientes', {
       url: "/pacientes?page",
       templateUrl: "pacientes/tabs.html"
     }).state('contato', {
@@ -18,6 +21,9 @@ angular.module('primeiraApp').config([
     }).state('consulta', {
       url: "/consulta",
       templateUrl: "consulta/consulta.html"
+    }).state('agenda', {
+      url: "/agenda",
+      templateUrl: "agenda/agenda.html"
     }).state('meuPerfil', {
       url: "/meuPerfil",
       templateUrl: "meuPerfil/meuPerfil.html"
