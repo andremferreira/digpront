@@ -1,4 +1,28 @@
 <div class="box-body">
+    <form>
+        <div role="form">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">
+                        <i class="fa fa-magic text-blue"></i> Filtar
+                        <small> - Pacientes</small>
+                    </h3>
+                </div>
+                <div class="box-body">
+                    <div class="row">
+                        <field label-style="text-transform: capitalize;" id="pacienteNome" label="Nome" model="paciente.name" placeholder="Informe o Nome" grid="5"
+                        class="text-uppercase"></field>
+                        <field label-style="text-transform: capitalize;" id="pacienteSobrenome" label="Sobrenome" model="paciente.sobrenome" placeholder="Informe o Sobrenome" grid="5"
+                        class="text-uppercase"></field>
+                        <my-button id="filtar" label="Ação" click="filtarPaciente()" btn-style="btn btn-primary" grid="2" img-icon="fa fa-filter"></my-button>
+                    </div>
+                </div>
+                <div class="box-footer">
+
+                </div>
+            </div>
+        </div>
+    </form>
     <table class="table">
         <thead>
             <tr>

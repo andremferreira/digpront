@@ -7,7 +7,14 @@ angular.module('primeiraApp').component('field', {
     model: '=',
     placeholder: '@',
     readonly: '<',
-    valor: '@'
+    valor: '@',
+    tabindex: '@',
+    onclick: '@',
+    onfocus: '@',
+    onblur: '@',
+    style: '@',
+    labelStyle: '@',
+    class: '@'
   },
   controller: [
     'gridSystem',
@@ -18,8 +25,10 @@ angular.module('primeiraApp').component('field', {
   template: `
    <div class="{{ $ctrl.gridClasses }}">
      <div class="form-group">
-       <label for="{{ $ctrl.id }}">{{ $ctrl.label }}</label>
-       <input ng-model="$ctrl.model" id="{{ $ctrl.id }}" class="form-control"
+       <label style="{{ $ctrl.labelStyle }}">{{ $ctrl.label }}</label>
+       <input ng-model="$ctrl.model" id="{{ $ctrl.id }}" class="form-control {{ $ctrl.class }}" tabindex="{{ $ctrl.tabindex }}"
+          onclick="$ctrl.onclick" onfocus="$ctrl.onfocus" onblur="$ctrl.onclur"
+          style="{{ $ctrl.style }}"
           type="{{ $ctrl.type }}" placeholder="{{ $ctrl.placeholder }}" value="{{ $ctrl.valor }}"
           ng-readonly="$ctrl.readonly" />
      </div>

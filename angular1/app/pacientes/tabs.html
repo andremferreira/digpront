@@ -1,12 +1,6 @@
-<content-header
-  txt-pos-ico=" "
-  icoimgs-p="fa fa-address-book-o text-yellow"
-  name="Paciente" 
-  small="Cadastro"
-  titulo-location="Paciente"
-  ></content-header>
+<content-header txt-pos-ico=" " icoimgs-p="fa fa-address-book-o text-yellow" name="Paciente" small="Cadastro" titulo-location="Paciente"></content-header>
 <section class="content">
-    <div class="nav-tabs-custom">
+    <div class="nav-tabs-custom" ng-controller="PacienteCtrl">
         <ul class="nav nav-tabs">
             <li>
                 <a href data-target="#tabList" data-toggle="tab">
@@ -23,15 +17,42 @@
                     <i class="fa fa-pencil"></i> Alterar
                 </a>
             </li>
+            <li>
+                <a href data-target="#tabConsulta" data-toggle="tab">
+                    <i class="fa fa-book"></i> Consultas
+                </a>
+            </li>
+            <li>
+                <a href data-target="#tabFormConsulta" data-toggle="tab">
+                    <i class="fa fa-heartbeat"></i> Prontuário
+                </a>
+            </li>
         </ul>
         <div class="tab-content">
-            <div class="tab-pane" ng-class="{active: true}" id="tabList" ng-include="'pacientes/list.html'"></div>
-            <div class="tab-pane" id="tabCreate" ng-include="'pacientes/form.html'"></div>
-            <div class="tab-pane" id="tabUpdate" ng-include="'pacientes/form.html'"></div>
+            <div class="tab-pane" 
+                id="tabList" 
+                ng-class="{active: tabList}"
+                ng-include="'pacientes/list.html'"></div>
+            <div class="tab-pane" 
+                id="tabCreate" 
+                ng-class="{active: tabCreate}"
+                ng-include="'pacientes/form.html'"></div>
+            <div class="tab-pane" 
+                id="tabUpdate"
+                ng-class="{active: tabUpdate}"
+                ng-include="'pacientes/form.html'"></div>
+            <div class="tab-pane" 
+                id="tabConsulta" 
+                ng-class="{active: tabConsulta}"
+                ng-include="'pacientes/consulta.html'"></div>
+            <div class="tab-pane" 
+                id="tabFormConsulta" 
+                ng-class="{active: tabFormConsulta}"
+                ng-include="'pacientes/consulta.html'"></div>
             <!--div class="tab-pane" id="tabCreate" ng-if="tabCreate" ng-include="'pacientes/form.html'"></div>
             <div class="tab-pane" id="tabUpdate" ng-if="tabUpdate" ng-class="{active: tabUpdate}" ng-include="'pacientes/form.html'"></div>
             <div class="tab-pane" id="tabDelete" ng-if="tabDelete" ng-class="{active: tabDelete}" ng-include="'pacientes/form.html'"></div>
         </div>
     -->
-    </div>
+        </div>
 </section>
