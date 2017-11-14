@@ -18,9 +18,11 @@ angular.module('primeiraApp').component('contentHeaderP', {
     template: `
        <section class="content-header">
          <div>
-           <img src="{{ $ctrl.imagem }}"><h1><i class="{{ $ctrl.icoimgsP }}"></i>{{ $ctrl.txtPosIco }}{{ $ctrl.name }}<br>
-           <small><i class="{{ $ctrl.icoimgs}}"></i>{{ $ctrl.preInf }}{{ $ctrl.pMaiusculaClasses }}{{ $ctrl.posInf }}</small></h1>
-         </div>
+          <div class="row box box-solid box-header with-border col-md-12">
+            <h1><i class="{{ $ctrl.icoimgsP }}"></i>{{ $ctrl.txtPosIco }}{{ $ctrl.name }}<br>
+            <small><i class="{{ $ctrl.icoimgs}}"></i>{{ $ctrl.preInf }}{{ $ctrl.pMaiusculaClasses }}{{ $ctrl.posInf }}</small></h1>
+          </div>
+        </div>
        </section>
     `
  });

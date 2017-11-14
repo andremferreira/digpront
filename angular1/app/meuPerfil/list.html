@@ -1,0 +1,31 @@
+<div class="box-body">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Sobrenome</th>
+        <th>E-mail</th>
+        <th>Crm</th>
+        <th>Cep</th>
+        <th>Celular</th>
+        <th>Ação</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="meuPerfil in meuPerfils">
+        <td>{{:: meuPerfil.nome }}</td>
+        <td>{{:: meuPerfil.sobrenome }}</td>
+        <td>{{:: meuPerfil.email }}</td>
+        <td>{{:: meuPerfil.crm }}</td>
+        <td>{{:: meuPerfil.cep }}</td>
+        <td>{{:: meuPerfil.celular }}</td>
+        <td>
+            <button class="btn btn-success"  ng-click="showTabUpdate(meuPerfil)">
+                <i class="fa fa-refresh"></i></button>
+                <button class="btn btn-warning" ng-click="">
+                    <i class="fa fa-user-plus"></i></button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

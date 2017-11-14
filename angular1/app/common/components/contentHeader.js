@@ -10,6 +10,7 @@ angular.module('primeiraApp').component('contentHeader', {
       posInf: '@',
       tabTitle:'@',
       stlI: '@',
+      tituloLocation: '@',
    },controller: [
     'pMaiuscula',
     function(pMaiuscula) {
@@ -17,11 +18,17 @@ angular.module('primeiraApp').component('contentHeader', {
     }
   ],
    template: `
-      <section class="content-header">
-        <div>
-        <img src="{{ $ctrl.imagem }}"><h1><i class="{{ $ctrl.icoimgsP }}" style="{{ $ctrl.stlI}} "></i>{{ $ctrl.txtPosIco }}{{ $ctrl.name }}
-          <small><i class="{{ $ctrl.icoimgs}}"></i>{{ $ctrl.preInf }}{{ $ctrl.pMaiusculaClasses }}{{ $ctrl.posInf }}</small></h1>
-        </div>
-      </section>
+   <section class="content-header">
+   <h1><i class="{{ $ctrl.icoimgsP }}" style="{{ $ctrl.stlI}} "></i>{{ $ctrl.txtPosIco }}{{ $ctrl.name }}
+   <small><i class="{{ $ctrl.icoimgs}}"></i>{{ $ctrl.preInf }}{{ $ctrl.pMaiusculaClasses }}{{ $ctrl.posInf }}</small></h1>
+   </h1>
+   <ol class="breadcrumb">
+       <li>
+           <a href="#">
+               <i class="fa fa-dashboard"></i> Home</a>
+       </li>
+       <li class="active"> {{ $ctrl.tituloLocation }}</li>
+   </ol>
+</section>
    `
 });

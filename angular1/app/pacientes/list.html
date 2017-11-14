@@ -1,1 +1,32 @@
-<h1>Lista</h1>
+<div class="box-body">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Sobrenome</th>
+                <th>Idade</th>
+                <th>Telefone</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="pacienteCadastro in pacienteCadastros">
+                <td>{{:: pacienteCadastro.name }}</td>
+                <td>{{:: pacienteCadastro.sobrenome }}</td>
+                <td>{{:: pacienteCadastro.idade }}</td>
+                <td>{{:: pacienteCadastro.telefone }}</td>
+                <td style="width:100px;">
+                    <button class="btn btn-sucess" ng-click="showTabInsert(pacienteCadastro)">
+                        <i class="fa fa-plus"></i>
+                    </button>
+                    <button class="btn btn-warning" ng-click="showTabUpdate(pacienteCadastro)">
+                        <i class="fa fa-pencil"></i>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="box-footer clearfix">
+    <paginator url="/#!/pacienteCadastros" pages="{{ pages }}"></paginator>
+</div>

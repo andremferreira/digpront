@@ -1,0 +1,24 @@
+<content-header
+txt-pos-ico=" " stl-i="color: gold;" icoimgs-p="fa fa-list-ol" name="Fila de Atendimento" small="Ordem de Chegada"
+titulo-location="Fila de Atendimento">
+</content-header>
+<section class="content">
+  <div class="nav-tabs-custom">
+    <ul class="nav nav-tabs">
+        <li>
+            <a href data-target="#tabList" data-toggle="tab">
+                <i class="fa fa-eye"></i> Ver Ordem da Fila
+            </a>
+        </li>
+        <li>
+            <a href data-target="#tabForm" data-toggle="tab">
+                <i class="fa fa-user-plus"></i> Adicionar Paciente na Fila
+            </a>
+        </li>
+    </ul>
+      <div class="tab-content">
+          <div class="tab-pane" ng-class="{active: true}" id="tabList" ng-include="'fila/listagem.html'"></div>
+          <div class="tab-pane" id="tabForm" ng-include="'fila/form.html'"></div>
+      </div>
+  </div>
+</section>

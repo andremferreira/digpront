@@ -1,10 +1,20 @@
 const _ = require('lodash')
 const BillingCycle = require('./billingCycle')
+const ObjectId = require('mongoose').Types.ObjectId
 
 BillingCycle.methods(['get', 'post', 'put', 'delete'])
 BillingCycle.updateOptions({new: true, runValidators: true})
-
 BillingCycle.after('post', sendErrorsOrNext).after('put', sendErrorsOrNext)
+
+BillingCycle.route('count', function(req, res, next) {
+  BillingCycle.count(function(error, value) {
+    if(error) {
+      res.status(500).json({errors: [error]})
+    } else {
+      res.json({value})
+    }
+  })
+})
 
 function sendErrorsOrNext(req, res, next) {
   const bundle = res.locals.bundle
@@ -22,15 +32,5 @@ function parseErrors(nodeRestfulErrors) {
   _.forIn(nodeRestfulErrors, error => errors.push(error.message))
   return errors
 }
-
-BillingCycle.route('count', function(req, res, next) {
-  BillingCycle.count(function(error, value) {
-    if(error) {
-      res.status(500).json({errors: [error]})
-    } else {
-      res.json({value})
-    }
-  })
-})
 
 module.exports = BillingCycle

@@ -1,0 +1,18 @@
+<div role="form">
+    <div class="box-body">
+        <field id="meuPerfilNome" label="Nome" model="meuPerfil.nome" placeholder="Informe o Nome" grid="12 6 4"></field>
+        <field id="meuPerfilSobrenome" label="Sobrenome" model="meuPerfil.sobrenome" placeholder="Informe o sobrenome" grid="12 6 4"></field>
+        <field id="meuPerfilEmail" label="E-mail" model="meuPerfil.email" placeholder="Informe o e-mail" grid="12 6 4"></field>
+        <field id="meuPerfilCrm" label="E-mail" model="meuPerfil.crm" placeholder="Informe o crm" grid="12 6 4"></field>
+        <field id="meuPerfilCep" label="CEP" model="meuPerfil.cep" placeholder="Informe o CEP" grid="12 6 4"></field>
+        <field id="meuPerfilCelular" label="Celular" model="meuPerfil.celular" placeholder="Informe o celular" grid="12 6 4"></field>
+        <field id="meuPerfilPassword" label="Senha" model="meuPerfil.pass" type="password" grid="12 6 4"></field>
+        <field id="meuPerfilPasswordConfirmacao" label="Confirmação de Senha" model="meuPerfil.conf_pass" type="password" grid="12 6 4"></field>
+        <field id="meuPerfilPassword" model="meuPerfil.password" type="hidden" grid="12 6 4"></field>
+    </div>
+    <div class="box-footer">
+        <button class="btn btn-info" ng-click="updateMeuPerfil()"> Alterar</button>
+        <!-- <button class="btn btn-danger" ng-click="deleteAssistente()"> Remover Assistente</button> -->
+        <button class="btn btn-default" ng-click="cancel()"> Cancelar</button>
+    </div>
+</div>

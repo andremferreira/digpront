@@ -14,7 +14,7 @@ const debtSchema = new mongoose.Schema({
 })
 
 const billingCycleSchema = new mongoose.Schema({
-  medico_id: { type: String, required: true },
+  medicoId: { type: mongoose.Schema.Types.ObjectId, ref:'User', required: true, index: true },
   name: { type: String, required: [true, 'Informe o atributo "Nome" de seu crontrole.' ] },
   month: { type: Number, min: 1, max: 12, required: [true, 'Informe o atributo "Mês".' ] },
   year: { type: Number, min: 1970, max: 2100, required: [true, 'Informe o atributo "Ano".'] },

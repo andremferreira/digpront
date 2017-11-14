@@ -10,6 +10,7 @@ module.exports = function (server) {
     server.use('/oapi', openApi)
 
     const AuthService = require('../api/user/authService')
+
     openApi.post('/login', AuthService.login)
     openApi.post('/signup', AuthService.signup)
     openApi.post('/validateToken', AuthService.validateToken)
@@ -25,6 +26,30 @@ module.exports = function (server) {
     const billingCycleService = require('../api/billingCycle/billingCycleService')
     billingCycleService.register(protectedApi, '/billingCycles')
 
+    const userService = require('../api/user/userService')
+    userService.register(protectedApi, '/users')
+
+    const userFilter = require('../api/user/userFilter')
+    protectedApi.route('/user/:id').get(userFilter.getUserById)
+
     const billingSummaryService = require('../api/billingSummary/billingSummaryService')
-    protectedApi.route('/billingSummary').get(billingSummaryService.getSummary)
+
+    protectedApi.route('/billingSummary/:medico').get(billingSummaryService.getSummary)
+
+    const billingFilter = require('../api/billingCycle/billingCycleFilter')
+
+    protectedApi.route('/billingFilter/count/:medico').get(billingFilter.getCountByMedic)
+    protectedApi.route('/billingFilter/medico/:medico').get(billingFilter.getListByMedic)
+
+    // Cadastro de Pacientes e Consultas
+    const cadastroPacienteService = require('../api/cadastroPaciente/cadastroPacienteService')
+    cadastroPacienteService.register(protectedApi, '/pacientes')
+
+    // Fila de atendimento
+    const filaService = require('../api/fila/filaService')
+    filaService.register(protectedApi, '/fila')
+
+
+
+
 }

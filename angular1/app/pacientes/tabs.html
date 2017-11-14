@@ -1,4 +1,10 @@
-<content-header txt-pos-ico=" " icoimgs-p="fa fa-address-book-o text-yellow" name="Pacientes" small="Cadastro"></content-header>
+<content-header
+  txt-pos-ico=" "
+  icoimgs-p="fa fa-address-book-o text-yellow"
+  name="Paciente" 
+  small="Cadastro"
+  titulo-location="Paciente"
+  ></content-header>
 <section class="content">
     <div class="nav-tabs-custom">
         <ul class="nav nav-tabs">
@@ -19,7 +25,7 @@
             </li>
         </ul>
         <div class="tab-content">
-            <div class="tab-pane" id="tabList" ng-include="'pacientes/list.html'"></div>
+            <div class="tab-pane" ng-class="{active: true}" id="tabList" ng-include="'pacientes/list.html'"></div>
             <div class="tab-pane" id="tabCreate" ng-include="'pacientes/form.html'"></div>
             <div class="tab-pane" id="tabUpdate" ng-include="'pacientes/form.html'"></div>
             <!--div class="tab-pane" id="tabCreate" ng-if="tabCreate" ng-include="'pacientes/form.html'"></div>

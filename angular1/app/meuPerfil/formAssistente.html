@@ -1,0 +1,12 @@
+<div role="form">
+    <div class="box-body">
+        <field id="assistenteNome" label="Nome" model="assistente.name" placeholder="Informe o Nome" grid="12 6 4"></field>
+        <field id="assistenteSobrenome" label="Sobrenome" model="assistente.sobrenome" placeholder="Informe o Sobrenome" grid="12 6 4"></field>
+        <field id="assistenteEmail" label="E-Mail" model="assistente.email" placeholder="Informe e-mail" grid="12 6 4"></field>
+        <field id="assistenteSenha" label="Senha" model="assistente.password" type="password" grid="12 6 4"></field>
+        <field id="assistenteConfirmacao" label="Confirmação" model="assistente.passwordConfirmacao" type="password" grid="12 6 4"></field>
+    </div>
+    <div class="box-footer">
+        <button class="btn btn-info" ng-click="adicionarAssistente()">Adicionar</button>
+    </div>
+</div>

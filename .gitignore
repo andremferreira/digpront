@@ -4,6 +4,13 @@ logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+.vscode
+backend_
+frontend
+quebrado_frontend
+angular1/node_modules
+angular1/public
+backend/node_modules
 
 # Runtime data
 pids

@@ -21,12 +21,12 @@ angular.module('primeiraApp').config([
     }).state('consulta', {
       url: "/consulta",
       templateUrl: "consulta/consulta.html"
-    }).state('agenda', {
-      url: "/agenda",
-      templateUrl: "agenda/agenda.html"
+    }).state('fila', {
+      url: "/fila",
+      templateUrl: "fila/fila.html"
     }).state('meuPerfil', {
       url: "/meuPerfil",
-      templateUrl: "meuPerfil/meuPerfil.html"
+      templateUrl: "meuPerfil/tabs.html"
     })
 
     $urlRouterProvider.otherwise('/welcome')

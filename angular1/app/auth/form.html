@@ -3,25 +3,48 @@
             <i class="fa fa-stethoscope text-red"></i><b> Digital Prontuário</b></div>
     <div class="login-box-body">
         <p class="login-box-msg" style="font-size: 22px; color:black;"><b>Bem Vindo!</b></p>
-        <p style="text-align:center;"> Esta área é de uso restrito. <img src="/assets/imgs/pass.png" /></p>
+        <div class="box box-solid box-header with-border" ng-hide="auth.loginMode">
+            <table>
+                <ti>
+                    <td>
+                            <img src="/assets/imgs/imgDoctor.png" style="width:48px; height:48px"/>
+                    </td>
+                    <td style="padding-top: 15px;padding-right: 15px;padding-bottom: 15px; padding-left: 15px;">
+                            <b> Informe seus dados pessoais no formulário abaixo para realizar seu cadastro..</b>
+                    </td>
+                </ti>
+            </table>
+        </div>
+        <p class="login-box-msg" style="font-size: 22px; color:black;" ng-hide="auth.loginMode">
+        <p style="text-align:center;" ng-show="auth.loginMode"> Esta área é de uso restrito. <img src="/assets/imgs/pass.png"/></p>
+        <div class="login-box-msg box-header with-border">
         <form>
-            <auth-field id="authName" model="auth.user.name" type="input"
+            <auth-field id="authNome" model="auth.user.nome" type="input"
                 placeholder="Informe o Nome" hide="auth.loginMode"></auth-field>
+            <auth-field id="authSobrenome" model="auth.user.sobrenome" type="input"
+                placeholder="Informe o Sobrenome" hide="auth.loginMode"></auth-field>
             <auth-field id="authEmail" model="auth.user.email" type="email"
                 placeholder="Informe o E-mail"></auth-field>
             <auth-field id="authPass" model="auth.user.password" type="password"
                 placeholder="Informe a Senha"></auth-field>
             <auth-field id="authConfirmPass" model="auth.user.confirm_password" type="password"
                 placeholder="Confirme a Senha" hide="auth.loginMode"></auth-field>
+            <auth-field id="authCrm" model="auth.user.crm" type="input"
+                placeholder="CRM" hide="auth.loginMode"></auth-field>
+            <auth-field id="authCep" model="auth.user.cep" type="input"
+                placeholder="Informe o CEP" hide="auth.loginMode"></auth-field>
+            <auth-field id="authCelular" model="auth.user.celular" type="input"
+                placeholder="Informe o Celular" hide="auth.loginMode"></auth-field>
             <div class="row">
                 <div class="col-sm-4">
                     <button class="btn btn-primary btn-block btn-flat"
-                        ng-click="auth.login()" ng-show="auth.loginMode"><b>Entrar</b></button>
+                        ng-click="auth.login()" ng-show="auth.loginMode" style="width:90px;"><b>Entrar</b></button>
                     <button class="btn btn-primary btn-block btn-flat"
-                        ng-click="auth.signup()" ng-hide="auth.loginMode"><b>Registrar</b></button>                    
+                        ng-click="auth.signup()" ng-hide="auth.loginMode" style="width:90px;"><b>Registrar</b></button>                    
                 </div>
             </div>
         </form>
+        </div>
         <br />
         <div style="text-align:center;">
         <a href="javascript:;" ng-click="auth.changeMode()" >

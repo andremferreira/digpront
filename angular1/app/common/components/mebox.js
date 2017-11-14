@@ -18,7 +18,7 @@ angular.module('primeiraApp').component('mebox', {
     }
   ],
   template: `
-  <div class="{{ $ctrl.gridClasses }}">
+  <div class="{{ $ctrl.gridClasses }}"  style"margin-right: 2cm; padding-right:60px;">
     <div class="box box-solid">
       <div class="box-header with-border">
           <i class="{{ $ctrl.icoimgs }}"></i>
