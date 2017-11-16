@@ -43,7 +43,10 @@ module.exports = function (server) {
 
     // Cadastro de Pacientes e Consultas
     const cadastroPacienteService = require('../api/cadastroPaciente/cadastroPacienteService')
-    cadastroPacienteService.register(protectedApi, '/pacientes')
+    cadastroPacienteService.register(protectedApi, '/cadastroPaciente')
+
+    const pacienteFilter = require('../api/cadastroPaciente/cadastroPacienteFilter')
+    protectedApi.route('/cadastroPacientes/:medico').get(pacienteFilter.getPacienteByMedicoId)
 
     // Fila de atendimento
     const filaService = require('../api/fila/filaService')

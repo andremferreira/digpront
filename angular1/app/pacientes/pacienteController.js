@@ -12,13 +12,15 @@ angular.module('primeiraApp').controller('PacienteCtrl', [
   function PacienteController($scope, $http, $location, msgs, tabs, consts, auth) {
     const vm = this
     vm.getUser = () => auth.getUser()
-    const usr = auth.getUser().medicoid
-    const url = `${consts.apiUrl}/pacientes/${usr}`
+    const usr = auth.getUser().medicoId
+    // const url = `${consts.apiUrl}/pacientes?:medicoId${usr}`
+    const url = `${consts.apiUrl}/cadastroPacientes/${usr}`
+    console.log(url)
     $scope.getPacientes = function () {
       $http.get(url).then(function (resp) {
         $scope.paciente = {}
         $scope.pacientes = resp.data
-        tabs.show($scope, { tabList: true , tabCreate: true })
+        tabs.show($scope, { tabList: true })
       })
     }
   
@@ -37,14 +39,16 @@ angular.module('primeiraApp').controller('PacienteCtrl', [
       }
     }
   
+  }
+
     $scope.createPaciente = function() {
-      const url = `${consts.apiUrl}/paciente`;
-      console.log(auth.getUser().medicoId)
+      const url = `${consts.apiUrl}/cadastroPaciente`
       $scope.paciente.medicoId = auth.getUser().medicoId
       $http.post(url, $scope.paciente).then(function(response) {
         $scope.paciente = {}
         $scope.getPacientes()
         msgs.addSuccess('Operação realizada com sucesso!!')
+        tabs.show($scope, { tabList: true })
       }).catch(function(resp) {
         msgs.addError(resp.data.errors)
       })
@@ -54,7 +58,7 @@ angular.module('primeiraApp').controller('PacienteCtrl', [
       // $scope.updateMeuPerfil()
       if ($scope.validar()) {
         // $scope.updateMeuPerfil()
-        const url = `${consts.apiUrl}/users/${$scope.paciente._id}`
+        const url = `${consts.apiUrl}/cadastroPaciente/${$scope.paciente._id}`
         $http.put(url, $scope.paciente).then(function (response) {
           $scope.paciente = {}
           $scope.getPacientes()
