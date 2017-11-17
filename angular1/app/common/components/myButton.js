@@ -4,7 +4,7 @@ angular.module('primeiraApp').component('myButton', {
     label: '@',
     imgIcon: '@',
     btnStyle: '@',
-    click: '@',
+    click: '<',
     grid: '@',
     text: '@',
     readonly: '<'

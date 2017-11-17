@@ -15,11 +15,25 @@ angular.module('primeiraApp').controller('PacienteCtrl', [
     const usr = auth.getUser().medicoId
     // const url = `${consts.apiUrl}/pacientes?:medicoId${usr}`
     const url = `${consts.apiUrl}/cadastroPacientes/${usr}`
-    console.log(url)
+
+    // console.log(url)
     $scope.getPacientes = function () {
-      $http.get(url).then(function (resp) {
+      console.log($scope.paciente)
+      $http.get(`${url}`).then(function (resp) {
         $scope.paciente = {}
         $scope.pacientes = resp.data
+        tabs.show($scope, { tabList: true })
+      })
+    }
+
+    $scope.filtrarPacientes = function() {
+      console.log(`${url}/${$scope.paciente.nome}/${$scope.paciente.sobrenome}`)
+      $http.get(`${url}/${$scope.paciente.nome}/${$scope.paciente.sobrenome}`).then(function (resp) {
+        $scope.paciente = {}
+        $scope.pacientes = {}
+        $scope.pacientes = resp.data
+        // $scope.pacientes.push(resp.data)
+        // console.log($scope.pacientes)
         tabs.show($scope, { tabList: true })
       })
     }
@@ -38,8 +52,6 @@ angular.module('primeiraApp').controller('PacienteCtrl', [
         }
       }
     }
-  
-  }
 
     $scope.createPaciente = function() {
       const url = `${consts.apiUrl}/cadastroPaciente`
@@ -75,6 +87,11 @@ angular.module('primeiraApp').controller('PacienteCtrl', [
       tabs.show($scope, { tabUpdate: true })
     }
   
+    $scope.showTabConsulta = function (paciente) {
+      $scope.paciente = paciente
+      tabs.show($scope, { tabConsulta: true })
+    }
+
     $scope.showTabCreate = function (paciente) {
       $scope.paciente = paciente
       tabs.show($scope, { tabUpdate: true , tabList: true})

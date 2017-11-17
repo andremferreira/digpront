@@ -47,6 +47,7 @@ module.exports = function (server) {
 
     const pacienteFilter = require('../api/cadastroPaciente/cadastroPacienteFilter')
     protectedApi.route('/cadastroPacientes/:medico').get(pacienteFilter.getPacienteByMedicoId)
+    protectedApi.route('/cadastroPacientes/:medico/:nome/:sobrenome').get(pacienteFilter.getPacienteByMedicoId)
 
     // Fila de atendimento
     const filaService = require('../api/fila/filaService')

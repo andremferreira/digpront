@@ -9,44 +9,53 @@
                     </h3>
                 </div>
                 <div class="box-body">
-                    <div class="row">
-                        <field label-style="text-transform: capitalize;" id="pacienteNome" label="Nome" model="cadastroPaciente.name" placeholder="Informe o Nome" grid="5"
-                        class="text-uppercase"></field>
-                        <field label-style="text-transform: capitalize;" id="pacienteSobrenome" label="Sobrenome" model="cadastroPaciente.sobrenome" placeholder="Informe o Sobrenome" grid="5"
-                        class="text-uppercase"></field>
-                        <my-button id="filtar" label="Ação" click="filtarPaciente()" btn-style="btn btn-primary" grid="2" img-icon="fa fa-filter"></my-button>
+                    <field label-style="text-transform: capitalize;" id="pacienteNome" label="Nome" model="paciente.nome" placeholder="Informe o Nome"
+                        grid="5" class="text-uppercase"></field>
+                    <field label-style="text-transform: capitalize;" id="pacienteSobrenome" label="Sobrenome" model="paciente.sobrenome" placeholder="Informe o Sobrenome"
+                        grid="5" class="text-uppercase"></field>
+                    <div class="col-sm-2">
+                        <div class="form-group">
+                            <label>Filtrar</label>
+                            <div class="form-group">
+                                <button class="btn btn btn-primary" ng-click="filtrarPacientes()">
+                                    <i class="fa fa-filter "></i>
+                                </button>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="box-footer">
-
                 </div>
             </div>
         </div>
-    </form>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Nome</th>
-                <th>Sobrenome</th>
-                <th>Idade</th>
-                <th>Telefone</th>
-                <th>Ações</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr ng-repeat="paciente in pacientes">
-                <td>{{:: paciente.nome }}</td>
-                <td>{{:: paciente.sobrenome }}</td>
-                <td>{{:: paciente.idade }}</td>
-                <td>{{:: paciente.telefone }}</td>
-                <td style="width:100px;">
-                    <button class="btn btn-warning" ng-click="showTabUpdate(pacienteCadastro)">
-                        <i class="fa fa-pencil"></i>
-                    </button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+</div>
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Sobrenome</th>
+            <th>Idade</th>
+            <th>Telefone</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="paciente in pacientes">
+            <td>{{:: paciente.nome }}</td>
+            <td>{{:: paciente.sobrenome }}</td>
+            <td>{{:: paciente.idade }}</td>
+            <td>{{:: paciente.telefone }}</td>
+            <td style="width:100px;">
+                <button class="btn btn-info" ng-click="showTabConsulta(pacienteConsulta)">
+                        <i class="fa fa-plus-circle"></i>
+                </button>
+                <button class="btn btn-warning" ng-click="showTabUpdate(pacienteCadastro)">
+                    <i class="fa fa-pencil"></i>
+                </button>
+
+            </td>
+        </tr>
+    </tbody>
+</table>
 </div>
 <div class="box-footer clearfix">
     <paginator url="/#!/pacienteCadastros" pages="{{ pages }}"></paginator>
