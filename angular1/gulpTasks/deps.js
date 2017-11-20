@@ -15,6 +15,10 @@ gulp.task('deps.js', () => {
     'node_modules/admin-lte/bootstrap/js/bootstrap.min.js',
     'node_modules/admin-lte/plugins/slimScroll/jquery.slimscroll.min.js',
     'node_modules/admin-lte/dist/js/app.min.js',
+    'node_modules/dateformat/lib/dateformat.js',
+    'node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js',
+    'node_modules/moment/min/moment.min.js'
+    
   ])
   .pipe(uglify())
   .pipe(concat('deps.min.js'))
@@ -26,8 +30,11 @@ gulp.task('deps.css', () => {
     'node_modules/angular-toastr/dist/angular-toastr.min.css',
     'node_modules/font-awesome/css/font-awesome.min.css',
     'node_modules/admin-lte/bootstrap/css/bootstrap.min.css',
+    'node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css',
+    'node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker3.css',
     'node_modules/admin-lte/dist/css/AdminLTE.min.css',
     'node_modules/admin-lte/dist/css/skins/_all-skins.min.css',
+    'node_modules/jquery-ui/themes/base/datepicker.css',
   ])
   .pipe(uglifycss({ "uglyComments": true }))
   .pipe(concat('deps.min.css'))

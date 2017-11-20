@@ -59,7 +59,6 @@ function MeuPerfilController($scope, $http, $location, msgs, tabs, consts, auth)
   }
 
   $scope.showTabUpdate = function (meuPerfil) {
-    console.log(meuPerfil)
     $scope.meuPerfil = meuPerfil
     tabs.show($scope, { tabUpdate: true })
   }

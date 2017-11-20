@@ -22,7 +22,7 @@ angular.module('primeiraApp').controller('PacienteCtrl', [
       $http.get(`${url}`).then(function (resp) {
         $scope.paciente = {}
         $scope.pacientes = resp.data
-        tabs.show($scope, { tabList: true })
+        tabs.show($scope, { tabList: true, tabCreate: true })
       })
     }
 
@@ -34,7 +34,7 @@ angular.module('primeiraApp').controller('PacienteCtrl', [
         $scope.pacientes = resp.data
         // $scope.pacientes.push(resp.data)
         // console.log($scope.pacientes)
-        tabs.show($scope, { tabList: true })
+        tabs.show($scope, { tabList: true, tabCreate: true })
       })
     }
   
@@ -67,14 +67,12 @@ angular.module('primeiraApp').controller('PacienteCtrl', [
     }
 
     $scope.updatePaciente = function () {
-      // $scope.updateMeuPerfil()
       if ($scope.validar()) {
-        // $scope.updateMeuPerfil()
         const url = `${consts.apiUrl}/cadastroPaciente/${$scope.paciente._id}`
         $http.put(url, $scope.paciente).then(function (response) {
           $scope.paciente = {}
           $scope.getPacientes()
-          tabs.show($scope, { tabList: true })
+          tabs.show($scope, { tabList: true, tabCreate: true })
           msgs.addSuccess('Operação realizada com sucesso!')
         }).catch(function (resp) {
           msgs.addError(resp.data.errors)
@@ -83,12 +81,14 @@ angular.module('primeiraApp').controller('PacienteCtrl', [
     }
   
     $scope.showTabUpdate = function (paciente) {
+
       $scope.paciente = paciente
       tabs.show($scope, { tabUpdate: true })
     }
   
     $scope.showTabConsulta = function (paciente) {
       $scope.paciente = paciente
+      // $scope.paciente.dt_nascimento = dt_nasc.substring(0, 10) 
       tabs.show($scope, { tabConsulta: true })
     }
 
@@ -98,7 +98,7 @@ angular.module('primeiraApp').controller('PacienteCtrl', [
     }
 
     $scope.cancel = function () {
-      tabs.show($scope, { tabList: true })
+      tabs.show($scope, { tabList: true , tabCreate: true })
       $scope.paciente = {}
     }
   

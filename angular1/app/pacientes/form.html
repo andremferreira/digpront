@@ -16,21 +16,33 @@
             model="paciente.sobrenome"
             placeholder="Informe o sobrenome" 
             grid="12 6 4"></field>
-        <field 
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label>Dt. Nascimento</label>
+                    <div class="input-group date">
+                    <div class="input-group-addon">
+                        <i class="fa fa-calendar"></i>
+                    </div>
+                        <input type="date" ng-model="paciente.dt_nascimento" name="pacienteNascimento" 
+                        class="form-control pull-right datepicker" id="pacienteNascimento">
+                    </div>
+                </div>
+            </div>
+        <!-- <field
             label-style="text-transform: capitalize;" 
             id="pacienteNascimento" 
             label="Dat. Nascimento" 
             model="paciente.dt_nascimento"
-            type="date" 
-            grid="12 6 4"></field>
-        <field 
+            grid="12 6 4"></field> -->
+        <field
             label-style="text-transform: capitalize;" 
             class="text-uppercase" 
             id="pacienteEndereco" 
             label="Endereço" 
             model="paciente.endereco"
             placeholder="Informe o endereço" 
-            grid="12 6 4"></field>
+            grid="12 6 4"          
+            ></field>
         <field 
             label-style="text-transform: capitalize;" 
             class="text-uppercase" 
@@ -349,7 +361,7 @@
             model="paciente.indicacao"
             placeholder="Informe o profissional que recomendou" 
             grid="12 6 4"></field>
-        <div class="col-sm-4">
+        <div class="col-sm-4" ng-if="tabCreate">
             <div class="group-form">
                 <label>Consulta</label>
                 <div class="checkbox" style="left:10px;">
@@ -367,10 +379,40 @@
                 </div>
             </div>
         </div>
+            <div class="container">
+                <div class="row">
+                    <div class='col-sm-6'>
+                        <div class="form-group">
+                            <div class='input-group date' id='datetimepicker1'>
+                                <input type='text' class="form-control" />
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <script type="text/javascript">
+                        $(function () {
+                            $('#datetimepicker1').datetimepicker();
+                        });
+                    </script>
+                </div>
+            </div>
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label>Date:</label>
+                <div class="input-group date">
+                <div class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                </div>
+                    <input type="text" name="pickyDate" class="form-control pull-right datepicker" id="pickyDate">
+                </div>
+            </div>
+        </div>
     </div>
     <div class="box-footer">
-        <button class="btn btn-info" ng-click="createPaciente()">Incluir</button>
-        <button class="btn btn-warning" ng-click="updatePaciente()">Alterar</button>
+        <button class="btn btn-info" ng-click="createPaciente()" ng-if="tabCreate">Incluir</button>
+        <button class="btn btn-warning" ng-click="updatePaciente()" ng-if="tabUpdate">Alterar</button>
         <button class="btn btn-default" ng-click="cancel()">Cancelar</button>
     </div>
 </div>
