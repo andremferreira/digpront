@@ -1,6 +1,7 @@
 angular.module('primeiraApp').controller('PacienteCtrl', [
     '$scope',
     '$http',
+    '$filter',
     '$location',
     'msgs',
     'tabs',
@@ -9,7 +10,7 @@ angular.module('primeiraApp').controller('PacienteCtrl', [
     PacienteController
   ])
   
-  function PacienteController($scope, $http, $location, msgs, tabs, consts, auth) {
+  function PacienteController($scope, $http, $filter,$location, msgs, tabs, consts, auth) {
     const vm = this
     vm.getUser = () => auth.getUser()
     const usr = auth.getUser().medicoId
@@ -68,6 +69,8 @@ angular.module('primeiraApp').controller('PacienteCtrl', [
 
     $scope.updatePaciente = function () {
       if ($scope.validar()) {
+        const pattern = /(\d{2})\/(\d{2})\/(\d{4})/
+        $scope.paciente.dt_nascimento = new Date($scope.paciente.dt_nascimento.replace(pattern, '$3-$2-$1'))
         const url = `${consts.apiUrl}/cadastroPaciente/${$scope.paciente._id}`
         $http.put(url, $scope.paciente).then(function (response) {
           $scope.paciente = {}
@@ -81,8 +84,8 @@ angular.module('primeiraApp').controller('PacienteCtrl', [
     }
   
     $scope.showTabUpdate = function (paciente) {
-
       $scope.paciente = paciente
+      $scope.paciente.dt_nascimento = $filter('date')(paciente.dt_nascimento, 'dd/MM/yyyy')
       tabs.show($scope, { tabUpdate: true })
     }
   
@@ -98,8 +101,8 @@ angular.module('primeiraApp').controller('PacienteCtrl', [
     }
 
     $scope.cancel = function () {
-      tabs.show($scope, { tabList: true , tabCreate: true })
       $scope.paciente = {}
+      tabs.show($scope, { tabList: true , tabCreate: true })
     }
   
     $scope.getPacientes()
