@@ -1,0 +1,57 @@
+<div class="box-body">
+        <form>
+            <div role="form">
+                <div class="box box-info">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">
+                            <i class="fa fa-ambulance text-info"></i> Consultas
+                            <small> - Realizadas</small>
+                        </h3>
+                    </div>
+                    <div class="box-body">
+                        <field label-style="text-transform: capitalize;" id="pacienteNome" label="Nome" model="paciente.nome"
+                            grid="3" class="text-uppercase" readonly="tabConsulta"></field>
+                        <field label-style="text-transform: capitalize;" id="pacienteSobrenome" label="Sobrenome" model="paciente.sobrenome"
+                            grid="4" class="text-uppercase" readonly="tabConsulta"></field>
+                        <field label-style="text-transform: capitalize;" id="pacienteIdade" label="Idade" model="paciente.idade"
+                            grid="2" class="text-uppercase" readonly="tabConsulta"></field>
+                        <div class="col-sm-2">
+                            <div class="form-group">
+                                <label>Criar</label>
+                                <div class="form-group">
+                                    <button class="btn btn-success" ng-click="novaConsulta()">
+                                        <i class="fa fa-plus-square "></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+    </form>
+    <table class="table">
+        <thead>
+            <tr>
+                <th style="width:15%;">Data da Consulta </th>
+                <th style="width:25%;">Queixa do Paciente</th>
+                <th style="width:20%;">Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="consultas in paciente.consultas">
+                <td>{{:: consultas.dataConsulta }}</td>
+                <td>{{:: consultas.queixa }}</td>
+                <td style="width:100px;" >
+                    <button class="btn btn-info" ng-click="verConsultaSelecionada(paciente)" style="padding:3px;"><i class="fa fa-eye"></i></button>
+                    <button class="btn bg-maroon " ng-click="dupliarConsulta(paciente)" style="padding:3px;"><i class="fa fa-copy"></i></button>
+                    <button class="btn btn-warning" ng-click="editarConsultaSelecionada(paciente)" style="padding:3px;"><i class="fa fa-pencil"></i></button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
+    <div class="box-footer clearfix">
+        <paginator url="/#!/pacienteCadastros" pages="{{ pages }}"></paginator>
+    </div>
+    <button class="btn btn-default" ng-click="cancel()">Cancelar</button>

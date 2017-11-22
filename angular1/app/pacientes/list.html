@@ -31,11 +31,11 @@
 <table class="table">
     <thead>
         <tr>
-            <th>Nome</th>
-            <th>Sobrenome</th>
-            <th>Idade</th>
-            <th>Telefone</th>
-            <th>Ações</th>
+            <th style="width:15%;">Nome</th>
+            <th style="width:25%;">Sobrenome</th>
+            <th style="width:10%;">Idade</th>
+            <th style="width:15%;">Telefone</th>
+            <th style="width:20%;">Ações</th>
         </tr>
     </thead>
     <tbody>
@@ -44,14 +44,11 @@
             <td>{{:: paciente.sobrenome }}</td>
             <td>{{:: paciente.idade }}</td>
             <td>{{:: paciente.telefone }}</td>
-            <td style="width:100px;">
-                <button class="btn btn-info" ng-click="showTabConsulta(paciente)">
-                        <i class="fa fa-plus-circle"></i>
-                </button>
-                <button class="btn btn-warning" ng-click="showTabUpdate(paciente)">
-                    <i class="fa fa-pencil"></i>
-                </button>
-
+            <td style="width:100px;" >
+                <button class="btn btn-info" ng-click="showTabConsulta(paciente)" style="padding:3px;"><i class="fa fa-eye"></i></button>
+                <button class="btn btn-success" ng-click="showTabConsultaForm(paciente)" style="padding:3px;"><i class="fa fa-plus-square"></i></button>
+                <button class="btn btn-warning" ng-click="showTabUpdate(paciente)" style="padding:3px;"><i class="fa fa-pencil"></i></button>
+                <button class="btn bg-purple" ng-click="showAdicionarLista(paciente)" style="padding:3px;"><i class="fa fa-list-ol"></i></button>
             </td>
         </tr>
     </tbody>
