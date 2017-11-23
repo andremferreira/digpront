@@ -18,7 +18,7 @@
                             <label>Filtrar</label>
                             <div class="form-group">
                                 <button class="btn btn btn-primary" ng-click="filtrarPacientes()">
-                                    <i class="fa fa-filter "></i>
+                                    <i class="fa fa-search "></i>
                                 </button>
                             </div>
                         </div>
@@ -44,11 +44,19 @@
             <td>{{:: paciente.sobrenome }}</td>
             <td>{{:: paciente.idade }}</td>
             <td>{{:: paciente.telefone }}</td>
-            <td style="width:100px;" >
-                <button class="btn btn-info" ng-click="showTabConsulta(paciente)" style="padding:3px;"><i class="fa fa-eye"></i></button>
-                <button class="btn btn-success" ng-click="showTabConsultaForm(paciente)" style="padding:3px;"><i class="fa fa-plus-square"></i></button>
-                <button class="btn btn-warning" ng-click="showTabUpdate(paciente)" style="padding:3px;"><i class="fa fa-pencil"></i></button>
-                <button class="btn bg-purple" ng-click="showAdicionarLista(paciente)" style="padding:3px;"><i class="fa fa-list-ol"></i></button>
+            <td style="width:100px;">
+                <button class="btn btn-info" ng-click="showTabConsulta(paciente)" style="padding:3px;">
+                    <i class="fa fa-eye"></i>
+                </button>
+                <button class="btn btn-success" ng-click="addConsultaBtn(paciente)" style="padding:3px;">
+                    <i class="fa fa-plus-square"></i>
+                </button>
+                <button class="btn btn-warning" ng-click="showTabUpdate(paciente)" style="padding:3px;">
+                    <i class="fa fa-pencil"></i>
+                </button>
+                <button class="btn bg-purple" ng-click="showAdicionarLista(paciente)" style="padding:3px;">
+                    <i class="fa fa-list-ol"></i>
+                </button>
             </td>
         </tr>
     </tbody>

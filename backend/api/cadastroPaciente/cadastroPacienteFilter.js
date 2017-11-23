@@ -65,7 +65,7 @@ function getPacienteByMedicoId(req, res, next) {
     CadastroPaciente.aggregate( 
       { $match: {   medicoId: new ObjectId(req.params.medico) , 
                     nome: new RegExp('^' + nome, "i") ,
-                    sobrenome: new RegExp('^' + sobrenome, "i")
+                    sobrenome: new RegExp( sobrenome, "i")
                 } 
       },
       { $project: {

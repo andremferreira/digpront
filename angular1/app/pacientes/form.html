@@ -4,18 +4,30 @@
             placeholder="Informe o nome" grid="12 6 4"></field>
         <field label-style="text-transform: capitalize;" class="text-uppercase" id="pacienteSobrenome" label="Sobrenome" model="paciente.sobrenome"
             placeholder="Informe o sobrenome" grid="12 6 4"></field>
-        <div class="col-sm-4">
+        <div class="col-sm-4" ng-if="tabCreate">
             <div class="form-group">
                 <label>Dt. Nascimento</label>
                 <div class="input-group date">
                     <div class="input-group-addon">
                         <i class="fa fa-calendar"></i>
                     </div>
-                    <input type="text" ng-model="paciente.dt_nascimento" name="pacienteNascimento" class="form-control pull-right datepicker"
+                    <input type="date" ng-model="paciente.dt_nascimento" name="pacienteNascimento" class="form-control pull-right datepicker"
                         id="pacienteNascimento">
                 </div>
             </div>
         </div>
+        <div class="col-sm-4" ng-if="tabUpdate">
+                <div class="form-group">
+                    <label>Dt. Nascimento</label>
+                    <div class="input-group date">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                        <input type="text" ng-model="paciente.dt_nascimento" name="pacienteNascimento" class="form-control pull-right datepicker"
+                            id="pacienteNascimento">
+                    </div>
+                </div>
+            </div>        
         <field label-style="text-transform: capitalize;" class="text-uppercase" id="pacienteEndereco" label="Endereço" model="paciente.endereco"
             placeholder="Informe o endereço" grid="12 6 4"></field>
         <field label-style="text-transform: capitalize;" class="text-uppercase" id="pacienteBairro" label="Bairro" model="paciente.bairro"
@@ -329,8 +341,8 @@
         </div>
      </div>
     <div class="box-footer">
-        <button class="btn btn-info" ng-click="createPaciente()" ng-if="tabCreate">Incluir</button>
-        <button class="btn btn-warning" ng-click="updatePaciente()" ng-if="tabUpdate">Alterar</button>
-        <button class="btn btn-default" ng-click="cancel()">Cancelar</button>
+        <button class="btn btn-info" ng-click="createPaciente()" ng-if="tabCreate"><i class="fa fa-check"></i> Incluir</button>
+        <button class="btn btn-warning" ng-click="updatePaciente()" ng-if="tabUpdate"><i class="fa fa-pencil"></i> Alterar</button>
+        <button class="btn btn-default" ng-click="cancel()"><i class="fa fa-remove text-red"></i> Cancelar</button>
     </div>
 </div>
