@@ -28,7 +28,7 @@ function getSeqByMedic(req, res, medico, next ) {
        res.status(500).json({errors: [error]})
      } else {
        console.log(res.json(value))
-       res.json(value)
+       res.json(_.defaults(result[0], {value:0}))
      }
    })
 }

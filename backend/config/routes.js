@@ -46,8 +46,10 @@ module.exports = function (server) {
     cadastroPacienteService.register(protectedApi, '/cadastroPaciente')
 
     const pacienteFilter = require('../api/cadastroPaciente/cadastroPacienteFilter')
-    protectedApi.route('/cadastroPacientes/:medico').get(pacienteFilter.getPacienteByMedicoId)
-    protectedApi.route('/cadastroPacientes/:medico/:nome/:sobrenome').get(pacienteFilter.getPacienteByMedicoId)
+    protectedApi.route('/cadastroPacientes/:medico/:limit/:skip').get(pacienteFilter.getPacienteByMedicoId)
+    protectedApi.route('/cadastroPacientes/:medico/:limit/:skip/:nome/:sobrenome').get(pacienteFilter.getPacienteByMedicoId)
+    protectedApi.route('/cadastroPacientesQtd/:medico').get(pacienteFilter.getQtdByMedicoId)
+    protectedApi.route('/cadastroPacientesQtd/:medico/:nome/:sobrenome').get(pacienteFilter.getQtdByMedicoId)
 
     // Fila de atendimento
     const filaService = require('../api/fila/filaService')

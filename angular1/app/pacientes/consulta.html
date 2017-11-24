@@ -45,7 +45,7 @@
     </thead>
     <tbody>
         <tr ng-repeat="consultas in paciente.consultas">
-            <td>{{:: consultas.dataConsulta }}</td>
+            <td><td-fmt-date text="{{:: consultas.dataConsulta }}"></td-fmt-date></td>
             <td>{{:: consultas.queixa }}</td>
             <td style="width:100px;">
                 <button class="btn btn-info" ng-click="verConsultaSelecionada(paciente)" style="padding:3px;">

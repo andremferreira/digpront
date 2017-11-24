@@ -5,7 +5,7 @@ const ObjectId = require('mongoose').Types.ObjectId
 function getPacienteByMedicoId(req, res, next) {
   if ((!req.params.nome && !req.params.sobrenome) || 
   (req.params.nome === "undefined" && req.params.sobrenome === "undefined") ) {
-    console.log('passei if 1')
+    // console.log('passei if 1')
     CadastroPaciente.aggregate(
       { $match: { medicoId: new ObjectId(req.params.medico) } },
       {
@@ -44,8 +44,15 @@ function getPacienteByMedicoId(req, res, next) {
           indicacao: "$indicacao",
           medicoId: "$medicoId",
           consultas: "$consultas"
-        }
-      }, function (error, resp) {
+        },
+      },
+      {
+        $limit: parseInt(parseInt(req.params.limit) + parseInt(req.params.skip)) 
+      },
+      {
+        $skip: parseInt(req.params.skip)
+      }
+      , function (error, resp) {
         if (error) {
           res.status(500).json({ errors: [error] })
         } else {
@@ -103,7 +110,14 @@ function getPacienteByMedicoId(req, res, next) {
         medicoId: "$medicoId",
         consultas: "$consultas"
       }
-     }, function(error, resp) {
+     },
+     {
+      $limit: parseInt(parseInt(req.params.limit) + parseInt(req.params.skip)) 
+    },
+    {
+      $skip: parseInt(req.params.skip)
+    }     
+     , function(error, resp) {
         if(error) {
           res.status(500).json({errors: [error]})
         } else {
@@ -113,4 +127,42 @@ function getPacienteByMedicoId(req, res, next) {
   }
 }
 
-module.exports = { getPacienteByMedicoId }
+function getQtdByMedicoId(req, res, next) {
+  if ((!req.params.nome && !req.params.sobrenome) || 
+  (req.params.nome === "undefined" && req.params.sobrenome === "undefined") ) {
+    // console.log('passei if 1')
+    CadastroPaciente.count(
+      { medicoId: new ObjectId(req.params.medico) }, function (error, resp) {
+        if (error) {
+          res.status(500).json({ errors: [error] })
+        } else {
+          // res.json(resp)
+          res.json(_.defaults({value:resp}))
+        }
+      })
+  } else {
+    var nome = req.params.nome
+    var sobrenome = req.params.sobrenome
+
+    if( req.params.sobrenome === "undefined"){
+      var sobrenome = ""
+    }else if( req.params.nome === "undefined"){
+      var nome = ""
+    }
+    console.log(`nome: ${nome} sobrenome: ${sobrenome}`)
+    CadastroPaciente.count( 
+      { medicoId: new ObjectId(req.params.medico) , 
+        nome: new RegExp('^' + nome, "i") ,
+        sobrenome: new RegExp( sobrenome, "i") 
+      }
+     , function(error, resp) {
+        if(error) {
+          res.status(500).json({errors: [error]})
+        } else {
+          res.json(resp)
+        }
+      })
+  }
+}
+
+module.exports = { getPacienteByMedicoId, getQtdByMedicoId }

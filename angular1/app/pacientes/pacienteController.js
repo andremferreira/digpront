@@ -15,21 +15,24 @@ function PacienteController($scope, $http, $filter, $location, $window, msgs, ta
   const vm = this
   vm.getUser = () => auth.getUser()
   const usr = auth.getUser().medicoId
-  // const url = `${consts.apiUrl}/pacientes?:medicoId${usr}`
-  const url = `${consts.apiUrl}/cadastroPacientes/${usr}`
-
-  // console.log(url)
+  const limit = parseInt(5)
+  const page = parseInt($location.search().page) || 1
+  console.log((page - 1) * 5)
+  const url = `${consts.apiUrl}/cadastroPacientes/${usr}/${limit}/${(page - 1) * 5}`
+  const url2 = `${consts.apiUrl}/cadastroPacientesQtd/${usr}`
+  console.log(url2)
   $scope.getPacientes = function () {
-    console.log($scope.paciente)
     $http.get(`${url}`).then(function (resp) {
       $scope.paciente = {}
       $scope.pacientes = resp.data
-      tabs.show($scope, { tabList: true, tabCreate: true })
+      $http.get(`${url2}`).then(function (resp) {
+        $scope.pages = Math.ceil(resp.data.value / 5)
+        tabs.show($scope, { tabList: true, tabCreate: true })
+      })
     })
   }
 
   $scope.filtrarPacientes = function () {
-    console.log(`${url}/${$scope.paciente.nome}/${$scope.paciente.sobrenome}`)
     $http.get(`${url}/${$scope.paciente.nome}/${$scope.paciente.sobrenome}`).then(function (resp) {
       $scope.paciente = {}
       $scope.pacientes = {}
@@ -44,7 +47,7 @@ function PacienteController($scope, $http, $filter, $location, $window, msgs, ta
     const emailRegex = /\S+@\S+\.\S+/
     if ($scope.paciente) {
       // Validação do e-mail
-      if ($scope.paciente.email) {
+      if ($scope.paciente.email || $scope.paciente.email.length) {
         if (!$scope.paciente.email.match(emailRegex)) {
           msgs.addError('O e-mail informado está inválido')
           return false
@@ -55,26 +58,50 @@ function PacienteController($scope, $http, $filter, $location, $window, msgs, ta
     }
   }
 
-  $scope.validarConsultaAdd = function () {
-    let consulta = new Object()
-      consulta.queixa = $scope.consulta.queixa
-      consulta.alergia = $scope.consulta.alergia
-      consulta.anamnese = $scope.consulta.anamnese
-      consulta.antecedente = $scope.consulta.antecedente 
-      consulta.conduta = $scope.consulta.conduta 
-      consulta.exameCompl = $scope.consulta.exameCompl 
-      consulta.historicoFamiliar = $scope.consulta.historicoFamiliar 
-      consulta.receitaMedica = $scope.consulta.receitaMedica  
-    
-    if ($scope.consulta) {
-      if (!$scope.consulta.queixa || !$scope.consulta.queixa.length) {
+  $scope.validarConsulta = function () {
+    var consult = {}
+    if (consult) {
+      if (!$scope.paciente.consultas.queixa || !$scope.paciente.consultas.queixa.length) {
         msgs.addError('O atributo "Queixa" é obrigatório. ')
         return false
-      } else if (!$scope.consulta.anamnese || !$scope.consulta.anamnese.length) {
+      } else if (!$scope.paciente.consultas.anamnese || !$scope.paciente.consultas.anamnese.length) {
         msgs.addError('O atributo "Anamnese" é obrigatório. ')
         return false
       } else {
-        $scope.paciente.consultas.push(consulta)
+        consult.queixa = $scope.paciente.consultas.queixa
+        consult.anamnese = $scope.paciente.consultas.anamnese
+        if (!$scope.paciente.consultas.alergia || $scope.paciente.consultas.alergia.length) {
+          consult.alergia = null
+        } else {
+          consult.alergia = $scope.paciente.consultas.alergia
+        }
+        if (!$scope.paciente.consultas.antecedente || $scope.paciente.consultas.antecedente.length) {
+          consult.antecedente = null
+        } else {
+          consult.antecedente = $scope.paciente.consultas.antecedente
+        }
+        if (!$scope.paciente.consultas.conduta || $scope.paciente.consultas.conduta.length) {
+          consult.conduta = null
+        } else {
+          consult.conduta = $scope.paciente.consultas.conduta
+        }
+        if (!$scope.paciente.consultas.exameCompl || $scope.paciente.consultas.exameCompl.length) {
+          consult.exameCompl = null
+        } else {
+          consult.exameCompl = $scope.paciente.consultas.exameCompl
+        }
+        if (!$scope.paciente.consultas.historicoFamiliar || $scope.paciente.consultas.historicoFamiliar.length) {
+          consult.historicoFamiliar = null
+        } else {
+          consult.historicoFamiliar = $scope.paciente.consultas.historicoFamiliar
+        }
+        if (!$scope.paciente.consultas.receitaMedica || $scope.paciente.consultas.receitaMedica.length) {
+          consult.receitaMedica = null
+        } else {
+          consult.receitaMedica = $scope.paciente.consultas.receitaMedica
+        }
+        console.log(consult)
+        $scope.paciente.consultas.push(consult)
         return true
       }
     }
@@ -96,21 +123,18 @@ function PacienteController($scope, $http, $filter, $location, $window, msgs, ta
   $scope.updatePaciente = function () {
     if ($scope.validar()) {
       const pattern = /(\d{2})\/(\d{2})\/(\d{4})/
-      var strToUpper = new String
+      let strToUpper = new String
       strToUpper = $scope.paciente.nome.toUpperCase()
       $scope.paciente.nome = strToUpper
       strToUpper = $scope.paciente.sobrenome.toUpperCase()
       $scope.paciente.sobrenome = strToUpper
       $scope.paciente.dt_nascimento = new Date($scope.paciente.dt_nascimento.replace(pattern, '$3-$2-$1'))
-
-      console.log($scope.paciente.dt_nascimento)
       const url = `${consts.apiUrl}/cadastroPaciente/${$scope.paciente._id}`
       $http.put(url, $scope.paciente).then(function (response) {
         $scope.paciente = {}
         $scope.getPacientes()
         tabs.show($scope, { tabList: true, tabCreate: true })
         msgs.addSuccess('Operação realizada com sucesso!')
-        // $window.location.reload($location)
       }).catch(function (resp) {
         msgs.addError(resp.data.errors)
       })
@@ -124,6 +148,7 @@ function PacienteController($scope, $http, $filter, $location, $window, msgs, ta
       console.log($scope.paciente)
       $http.put(url, $scope.paciente).then(function (response) {
         $scope.showTabConsulta()
+        $scope.paciente = response.data
         msgs.addSuccess('Operação realizada com sucesso!')
         // $window.location.reload($location)
       }).catch(function (resp) {
@@ -167,20 +192,9 @@ function PacienteController($scope, $http, $filter, $location, $window, msgs, ta
     $scope.paciente.consultas.splice(index, 1)
   }
 
-   $scope.addConsulta = function (index, object) {
-     $scope.paciente.consultas.splice(index + 1, 0, {
-  //     // queixa: null,
-  //     // anamnese: null,
-  //     // antecedente: null,
-  //     // medicacao: null,
-  //     // alergia: null,
-  //     // historicoFamiliar: null,
-  //     // exameFisico: null,
-  //     // exameCompl: null,
-  //     // conduta: null,
-  //     // receitaMedica: null
-     })
-   }
+  $scope.addConsulta = function (index) {
+    $scope.paciente.consultas.splice(index + 1, 0, {})
+  }
 
   $scope.showTabConsultaForm = function (paciente) {
     $scope.paciente = paciente
