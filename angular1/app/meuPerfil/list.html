@@ -2,30 +2,39 @@
   <table class="table">
     <thead>
       <tr>
-        <th>Nome</th>
-        <th>Sobrenome</th>
-        <th>E-mail</th>
-        <th>Crm</th>
-        <th>Cep</th>
-        <th>Celular</th>
-        <th>Ação</th>
+        <th style="width:20%;">Nome</th>
+        <th style="width:30%;">Sobrenome</th>
+        <th style="width:30%;">E-mail</th>
+        <th style="width:10%;">Atualizar</th>
       </tr>
     </thead>
     <tbody>
       <tr ng-repeat="meuPerfil in meuPerfils">
-        <td>{{:: meuPerfil.nome }}</td>
-        <td>{{:: meuPerfil.sobrenome }}</td>
-        <td>{{:: meuPerfil.email }}</td>
-        <td>{{:: meuPerfil.crm }}</td>
-        <td>{{:: meuPerfil.cep }}</td>
-        <td>{{:: meuPerfil.celular }}</td>
-        <td>
-            <button class="btn btn-success"  ng-click="showTabUpdate(meuPerfil)">
-                <i class="fa fa-refresh"></i></button>
-                <button class="btn btn-warning" ng-click="">
-                    <i class="fa fa-user-plus"></i></button>
-        </td>
+        <td style="width:20%;">{{:: meuPerfil.nome }}</td>
+        <td style="width:30%;">{{:: meuPerfil.sobrenome }}</td>
+        <td style="width:30%;">{{:: meuPerfil.email }}</td>
+        <td style="width:10%; text-align: center;"><button class="btn btn-info" ng-click="showTabUpdate(meuPerfil)">
+          <i class="fa fa-refresh"></i></td>
       </tr>
     </tbody>
   </table>
+  <table class="table">
+    <thead>
+      <tr>
+        <th style="width:20%;">CRM</th>
+        <th style="width:30%;">CEP</th>
+        <th style="width:30%;">Celular</th>
+        <th style="width:10%;">Assistente</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="meuPerfil in meuPerfils">
+        <td style="width:20%;">{{:: meuPerfil.crm }}</td>
+        <td style="width:30%;">{{:: meuPerfil.cep }}</td>
+        <td style="width:30%;">{{:: meuPerfil.celular }}</td>
+        <td style="width:10%; text-align: center;"><button class="btn bg-purple" ng-click="">
+          <i class="fa fa-user-plus"></i></button></td>
+      </tr>
+    </tbody>
+  </table>  
 </div>
