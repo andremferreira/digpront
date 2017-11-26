@@ -157,6 +157,38 @@ function PacienteController($scope, $http, $filter, $location, $window, msgs, ta
     }
   }
 
+  $scope.limpar = function (campo) {
+    switch (campo) {
+      case 'queixa':
+        $scope.paciente.consultas.queixa = null;
+        break;
+      case 'anamnese':
+        $scope.paciente.consultas.anamnese = null;
+        break;
+      case 'antecedente':
+        $scope.paciente.consultas.antecedente = null;
+        break;
+      case 'alergia':
+        $scope.paciente.consultas.alergia = null;
+        break;
+      case 'historicoFamiliar':
+        $scope.paciente.consultas.historicoFamiliar = null;
+        break;
+      case 'exameFisico':
+        $scope.paciente.consultas.exameFisico = null;
+        break;
+      case 'exameCompl':
+        $scope.paciente.consultas.exameCompl = null;
+        break;
+      case 'conduta':
+        $scope.paciente.consultas.conduta = null;
+        break;
+      case 'receitaMedica':
+        $scope.paciente.consultas.receitaMedica = null;
+        break;
+    }
+  }
+
   $scope.showTabUpdate = function (paciente) {
     $scope.paciente = paciente
     $scope.paciente.dt_nascimento = $filter('date')(paciente.dt_nascimento, 'dd/MM/yyyy')
@@ -180,7 +212,7 @@ function PacienteController($scope, $http, $filter, $location, $window, msgs, ta
 
   $scope.cancelConsulta = function (paciente) {
     $scope.paciente = paciente
-    $scope.delConsulta()
+    // $scope.delConsulta()
     tabs.show($scope, { tabConsulta: true })
   }
   $scope.addConsultaBtn = function (paciente) {

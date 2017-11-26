@@ -41,7 +41,6 @@ function MeuPerfilController($scope, $http, $location, msgs, tabs, consts, auth)
     }
   }
 
-
   $scope.updateMeuPerfil = function () {
     // $scope.updateMeuPerfil()
     if ($scope.validar()) {
