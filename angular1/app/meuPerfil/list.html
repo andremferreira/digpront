@@ -1,11 +1,11 @@
 <div class="box-body">
-  <table class="table">
+  <table class="table" style="width: 100%;">
     <thead>
       <tr>
         <th style="width:20%;">Nome</th>
         <th style="width:30%;">Sobrenome</th>
         <th style="width:30%;">E-mail</th>
-        <th style="width:10%;">Atualizar</th>
+        <th style="width:10%; text-align: right; padding-right:15px;">Atualizar</th>
       </tr>
     </thead>
     <tbody>
@@ -13,18 +13,18 @@
         <td style="width:20%;">{{:: meuPerfil.nome }}</td>
         <td style="width:30%;">{{:: meuPerfil.sobrenome }}</td>
         <td style="width:30%;">{{:: meuPerfil.email }}</td>
-        <td style="width:10%; text-align: left;"><spam style="padding-left:7px;"><button class="btn btn-info" style="padding:7px; width:32px;" ng-click="showTabUpdate(meuPerfil)">
+        <td style="width:10%; text-align: right;"><spam style="padding-right:20px;"><button class="btn btn-info" style="padding:7px; width:32px;" ng-click="showTabUpdate(meuPerfil)">
           <i class="fa fa-refresh"></i></button></spam></td>
       </tr>
     </tbody>
   </table>
-  <table class="table">
+  <table class="table" style="width: 100%;">
     <thead>
       <tr>
         <th style="width:20%;">CRM</th>
         <th style="width:30%;">CEP</th>
         <th style="width:30%;">Celular</th>
-        <th style="width:10%;">Assistente</th>
+        <th style="width:10%; text-align: right; padding-right:10px;">Assistente</th>
       </tr>
     </thead>
     <tbody>
@@ -32,7 +32,7 @@
         <td style="width:20%;">{{:: meuPerfil.crm }}</td>
         <td style="width:30%;">{{:: meuPerfil.cep }}</td>
         <td style="width:30%;">{{:: meuPerfil.celular }}</td>
-        <td style="width:10%; text-align: left;"><spam style="padding-left:7px;"><button class="btn bg-purple" style="padding:7px; width:32px;" ng-click="">
+        <td style="width:10%; text-align: right;"><spam style="padding-right:20px;"><button class="btn bg-purple" style="padding:7px; width:32px;" ng-click="">
           <i class="fa fa-user-plus"></i></button></spam></td>
       </tr>
     </tbody>
