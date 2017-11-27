@@ -17,6 +17,7 @@ function PacienteController($scope, $http, $filter, $location, $window, msgs, ta
   const usr = auth.getUser().medicoId
   const limit = parseInt(5)
   const page = parseInt($location.search().page) || 1
+  // $scope.paciente.consultas = [{}]  
   console.log((page - 1) * 5)
   const url = `${consts.apiUrl}/cadastroPacientes/${usr}/${limit}/${(page - 1) * 5}`
   const url2 = `${consts.apiUrl}/cadastroPacientesQtd/${usr}`
@@ -100,8 +101,25 @@ function PacienteController($scope, $http, $filter, $location, $window, msgs, ta
         } else {
           consult.receitaMedica = $scope.paciente.consultas.receitaMedica
         }
-        console.log(consult)
+        // console.log(consulta)
         $scope.paciente.consultas.push(consult)
+        return true
+      }
+    }
+  }
+
+  $scope.validarConsultaEdit = function (paciente, index, consulta ) {
+    var consult = {}
+    if (consult) {
+      if (!$scope.consulta.queixa || !$scope.consulta.queixa.length) {
+        msgs.addError('O atributo "Queixa" é obrigatório. ')
+        return false
+      } else if (!$scope.consulta.anamnese || !$scope.consulta.anamnese.length) {
+        msgs.addError('O atributo "Anamnese" é obrigatório. ')
+        return false
+       } else {
+        console.log($scope.consulta, $scope.consulta.index)
+        $scope.paciente.consultas.splice($scope.consulta.index, 1, $scope.consulta)
         return true
       }
     }
@@ -157,6 +175,21 @@ function PacienteController($scope, $http, $filter, $location, $window, msgs, ta
     }
   }
 
+  $scope.editFormConsulta = function () {
+    if ($scope.validarConsultaEdit()) {
+      const url = `${consts.apiUrl}/cadastroPaciente/${$scope.paciente._id}`
+      console.log($scope.paciente)
+      $http.put(url, $scope.paciente).then(function (response) {
+        $scope.showTabConsulta()
+        $scope.paciente = response.data
+        msgs.addSuccess('Operação realizada com sucesso!')
+        // $window.location.reload($location)
+      }).catch(function (resp) {
+        msgs.addError(resp.data.errors)
+      })
+    }
+  }
+
   $scope.limpar = function (campo) {
     switch (campo) {
       case 'queixa':
@@ -195,6 +228,22 @@ function PacienteController($scope, $http, $filter, $location, $window, msgs, ta
     tabs.show($scope, { tabUpdate: true })
   }
 
+  $scope.editarConsulta = function(paciente, index, consulta) {
+    // console.log(index)
+    // console.log($scope.paciente.consultas)
+    $scope.consulta = {}
+    $scope.consulta.index =  index
+    $scope.consulta.queixa = $scope.paciente.consultas[index].queixa
+    $scope.consulta.anamnese = $scope.paciente.consultas[index].anamnese
+    $scope.consulta.antecedente = $scope.paciente.consultas[index].antecedente
+    $scope.consulta.alergia = $scope.paciente.consultas[index].alergia
+    $scope.consulta.historicoFamiliar = $scope.paciente.consultas[index].historicoFamiliar
+    $scope.consulta.exameFisico = $scope.paciente.consultas[index].exameFisico
+    $scope.consulta.exameCompl = $scope.paciente.consultas[index].exameCompl
+    $scope.consulta.conduta = $scope.paciente.consultas[index].conduta
+    $scope.consulta.receitaMedica = $scope.paciente.consultas[index].receitaMedica
+    tabs.show($scope, { tabFormConsultaAlterar: true })
+  }
   $scope.showTabConsulta = function (paciente) {
     $scope.paciente = paciente
     tabs.show($scope, { tabConsulta: true })

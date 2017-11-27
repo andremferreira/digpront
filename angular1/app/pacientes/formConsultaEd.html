@@ -40,7 +40,7 @@
                                     <tr>
                                         <td style="width:95%; text-align:Baseline;">
                                             <div class="input-group" style="width:100%;">
-                                                <textarea ng-model="paciente.consultas.queixa" style="width:100%; height:80px;" index="1" name="consultaQueixa" id="consultaQueixa"
+                                                <textarea ng-model="consulta.queixa" style="width:100%; height:80px;" index="1" name="consultaQueixa" id="consultaQueixa"
                                                     class="form-control text-uppercase"></textarea>
                                             </div>
                                         </td>
@@ -60,7 +60,7 @@
                                     <tr>
                                         <td style="width:95%; text-align:Baseline;">
                                             <div class="input-group" style="width:100%;">
-                                                <textarea ng-model="paciente.consultas.anamnese" style="width:100%; height:80px;" index="2" name="consultaAnamnese" id="consultaAnamnese"
+                                                <textarea ng-model="consulta.anamnese" style="width:100%; height:80px;" index="2" name="consultaAnamnese" id="consultaAnamnese"
                                                     class="form-control text-uppercase"></textarea>
                                             </div>
                                         </td>
@@ -80,7 +80,7 @@
                                     <tr>
                                         <td style="width:95%; text-align:Baseline;">
                                             <div class="input-group" style="width:100%;">
-                                                <textarea ng-model="paciente.consultas.antecedente" style="width:100%; height:50px;" index="3" name="consultaAntecedente" id="consultaAntecedente"
+                                                <textarea ng-model="consulta.antecedente" style="width:100%; height:50px;" index="3" name="consultaAntecedente" id="consultaAntecedente"
                                                     class="form-control text-uppercase"></textarea>
                                             </div>
                                         </td>
@@ -100,7 +100,7 @@
                                     <tr>
                                         <td style="width:95%; text-align:Baseline;">
                                             <div class="input-group" style="width:100%;">
-                                                <textarea ng-model="paciente.consultas.alergia" style="width:100%; height:50px;" index="4" name="consultaAlergia" id="consultaAlergia"
+                                                <textarea ng-model="consulta.alergia" style="width:100%; height:50px;" index="4" name="consultaAlergia" id="consultaAlergia"
                                                     class="form-control text-uppercase"></textarea>
                                             </div>
                                         </td>
@@ -120,7 +120,7 @@
                                     <tr>
                                         <td style="width:95%; text-align:Baseline;">
                                             <div class="input-group" style="width:100%;">
-                                                <textarea ng-model="paciente.consultas.historicoFamiliar" style="width:100%; height:50px;" index="5" name="consultaHistoricoFamiliar"
+                                                <textarea ng-model="consulta.historicoFamiliar" style="width:100%; height:50px;" index="5" name="consultaHistoricoFamiliar"
                                                     id="consultaHistoricoFamiliar" class="form-control text-uppercase"></textarea>
                                             </div>
                                         </td>
@@ -140,7 +140,7 @@
                                     <tr>
                                         <td style="width:95%; text-align:Baseline;">
                                             <div class="input-group" style="width:100%;">
-                                                <textarea ng-model="paciente.consultas.exameFisico" style="width:100%; height:50px;" index="6" name="consultaExameFisico" id="consultaExameFisico"
+                                                <textarea ng-model="consulta.exameFisico" style="width:100%; height:50px;" index="6" name="consultaExameFisico" id="consultaExameFisico"
                                                     class="form-control text-uppercase"></textarea>
                                             </div>
                                         </td>
@@ -160,7 +160,7 @@
                                     <tr>
                                         <td style="width:95%; text-align:Baseline;">
                                             <div class="input-group" style="width:100%;">
-                                                <textarea ng-model="paciente.consultas.exameCompl" style="width:100%; height:50px;" index="7" name="consultaExameCompl" id="consultaExameCompl"
+                                                <textarea ng-model="consulta.exameCompl" style="width:100%; height:50px;" index="7" name="consultaExameCompl" id="consultaExameCompl"
                                                     class="form-control text-uppercase"></textarea>
                                             </div>
                                         </td>
@@ -180,7 +180,7 @@
                                     <tr>
                                         <td style="width:95%; text-align:Baseline;">
                                             <div class="input-group" style="width:100%;">
-                                                <textarea ng-model="paciente.consultas.conduta" style="width:100%; height:50px;" index="8" name="consultaConduta" id="consultaConduta"
+                                                <textarea ng-model="consulta.conduta" style="width:100%; height:50px;" index="8" name="consultaConduta" id="consultaConduta"
                                                     class="form-control text-uppercase"></textarea>
                                             </div>
                                         </td>
@@ -200,7 +200,7 @@
                                     <tr>
                                         <td style="width:95%; text-align:Baseline;">
                                             <div class="input-group" style="width:100%;">
-                                                <textarea ng-model="paciente.consultas.receitaMedica" style="width:100%; height:50px;" index="9" name="consultaReceitaMedica" id="consultaReceitaMedica"
+                                                <textarea ng-model="consulta.receitaMedica" style="width:100%; height:50px;" index="9" name="consultaReceitaMedica" id="consultaReceitaMedica"
                                                     class="form-control text-uppercase"></textarea>
                                             </div>
                                         </td>
@@ -218,8 +218,8 @@
             </div>
         </form>
         <div class="box-footer">
-            <button class="btn btn-info" ng-click="addFormConsulta()" index="11">
-                <i class="fa fa-check"></i> Salvar</button>
+            <button class="btn btn-info" ng-click="editFormConsulta(paciente, index, consulta)" ng-if="tabFormConsultaAlterar">
+                <i class="fa fa-pencil"></i>Alterar</button>
             <button class="btn btn-default" ng-click="cancelConsulta(paciente)" index="12">
                 <i class="fa fa-remove text-red"></i> Cancelar</button>
         </div>
