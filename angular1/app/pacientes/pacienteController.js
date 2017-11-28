@@ -17,30 +17,45 @@ function PacienteController($scope, $http, $filter, $location, $window, msgs, ta
   const usr = auth.getUser().medicoId
   const limit = parseInt(5)
   const page = parseInt($location.search().page) || 1
-  // $scope.paciente.consultas = [{}]  
-  console.log((page - 1) * 5)
-  const url = `${consts.apiUrl}/cadastroPacientes/${usr}/${limit}/${(page - 1) * 5}`
+  const url = `${consts.apiUrl}/cadastroPacientes/${usr}/${limit}/${(page - 1) * limit}`
   const url2 = `${consts.apiUrl}/cadastroPacientesQtd/${usr}`
-  console.log(url2)
   $scope.getPacientes = function () {
     $http.get(`${url}`).then(function (resp) {
       $scope.paciente = {}
       $scope.pacientes = resp.data
       $http.get(`${url2}`).then(function (resp) {
-        $scope.pages = Math.ceil(resp.data.value / 5)
+        $scope.pages = Math.ceil(resp.data.value / limit)
+
+        if ( $scope.pages > 1 ){
+          $scope.showPages = true
+        } else {
+          $scope.showPages = false
+        }
         tabs.show($scope, { tabList: true, tabCreate: true })
       })
     })
   }
 
   $scope.filtrarPacientes = function () {
-    $http.get(`${url}/${$scope.paciente.nome}/${$scope.paciente.sobrenome}`).then(function (resp) {
+    const usr = auth.getUser().medicoId
+    const limit = parseInt(5)
+    const page = parseInt($location.search().page) || 1
+    const url = `${consts.apiUrl}/cadastroPacientes/${usr}/${limit}/${(page - 1) * limit}/${$scope.paciente.nome}/${$scope.paciente.sobrenome}`
+    const url2 = `${consts.apiUrl}/cadastroPacientesQtd/${usr}/${$scope.paciente.nome}/${$scope.paciente.sobrenome}`
+    console.log(url)
+    console.log(url2)
+    $http.get(`${url}`).then(function (resp) {
       $scope.paciente = {}
-      $scope.pacientes = {}
       $scope.pacientes = resp.data
-      // $scope.pacientes.push(resp.data)
-      // console.log($scope.pacientes)
-      tabs.show($scope, { tabList: true, tabCreate: true })
+      $http.get(`${url2}`).then(function (resp) {
+        $scope.pages = {}
+        $scope.pages = Math.ceil(resp.data.value / limit)
+        if ( $scope.pages > 1 ){
+          $scope.showPages = true
+        } else {
+          $scope.showPages = false
+        }
+      })
     })
   }
 
@@ -101,7 +116,6 @@ function PacienteController($scope, $http, $filter, $location, $window, msgs, ta
         } else {
           consult.receitaMedica = $scope.paciente.consultas.receitaMedica
         }
-        // console.log(consulta)
         $scope.paciente.consultas.push(consult)
         return true
       }
@@ -162,13 +176,11 @@ function PacienteController($scope, $http, $filter, $location, $window, msgs, ta
   $scope.addFormConsulta = function () {
     if ($scope.validarConsulta()) {
       const url = `${consts.apiUrl}/cadastroPaciente/${$scope.paciente._id}`
-      // $scope.paciente.consultas.push({})
       console.log($scope.paciente)
       $http.put(url, $scope.paciente).then(function (response) {
         $scope.showTabConsulta()
         $scope.paciente = response.data
         msgs.addSuccess('Operação realizada com sucesso!')
-        // $window.location.reload($location)
       }).catch(function (resp) {
         msgs.addError(resp.data.errors)
       })
@@ -178,12 +190,10 @@ function PacienteController($scope, $http, $filter, $location, $window, msgs, ta
   $scope.editFormConsulta = function () {
     if ($scope.validarConsultaEdit()) {
       const url = `${consts.apiUrl}/cadastroPaciente/${$scope.paciente._id}`
-      console.log($scope.paciente)
       $http.put(url, $scope.paciente).then(function (response) {
         $scope.showTabConsulta()
         $scope.paciente = response.data
         msgs.addSuccess('Operação realizada com sucesso!')
-        // $window.location.reload($location)
       }).catch(function (resp) {
         msgs.addError(resp.data.errors)
       })
@@ -229,8 +239,6 @@ function PacienteController($scope, $http, $filter, $location, $window, msgs, ta
   }
 
   $scope.editarConsulta = function(paciente, index, consulta) {
-    // console.log(index)
-    // console.log($scope.paciente.consultas)
     $scope.consulta = {}
     $scope.consulta.index =  index
     $scope.consulta.queixa = $scope.paciente.consultas[index].queixa
@@ -244,7 +252,7 @@ function PacienteController($scope, $http, $filter, $location, $window, msgs, ta
     $scope.consulta.receitaMedica = $scope.paciente.consultas[index].receitaMedica
     tabs.show($scope, { tabFormConsultaAlterar: true })
   }
- 
+
   $scope.showTabConsulta = function (paciente) {
     $scope.paciente = paciente
     tabs.show($scope, { tabConsulta: true })
@@ -262,7 +270,6 @@ function PacienteController($scope, $http, $filter, $location, $window, msgs, ta
 
   $scope.cancelConsulta = function (paciente) {
     $scope.paciente = paciente
-    // $scope.delConsulta()
     tabs.show($scope, { tabConsulta: true })
   }
   $scope.addConsultaBtn = function (paciente) {
@@ -283,21 +290,5 @@ function PacienteController($scope, $http, $filter, $location, $window, msgs, ta
     tabs.show($scope, { tabFormConsulta: true })
   }
 
-  $scope.detalhesConsulta = function(paciente, index, consulta) {
-    $scope.consulta = {}
-    $scope.consulta.index =  index
-    $scope.consulta.queixa = $scope.paciente.consultas[index].queixa
-    $scope.consulta.anamnese = $scope.paciente.consultas[index].anamnese
-    $scope.consulta.antecedente = $scope.paciente.consultas[index].antecedente
-    $scope.consulta.alergia = $scope.paciente.consultas[index].alergia
-    $scope.consulta.historicoFamiliar = $scope.paciente.consultas[index].historicoFamiliar
-    $scope.consulta.exameFisico = $scope.paciente.consultas[index].exameFisico
-    $scope.consulta.exameCompl = $scope.paciente.consultas[index].exameCompl
-    $scope.consulta.conduta = $scope.paciente.consultas[index].conduta
-    $scope.consulta.receitaMedica = $scope.paciente.consultas[index].receitaMedica
-    $scope.consulta.dataConsulta = $filter('date')($scope.paciente.consultas[index].dataConsulta, 'dd/MM/yyyy HH:MM:ss')
-    tabs.show($scope, { tabConsultaDetail: true })
-  }
-  
   $scope.getPacientes()
 }

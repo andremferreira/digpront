@@ -159,7 +159,7 @@ function getQtdByMedicoId(req, res, next) {
         if(error) {
           res.status(500).json({errors: [error]})
         } else {
-          res.json(resp)
+          res.json(_.defaults({value:resp}))
         }
       })
   }

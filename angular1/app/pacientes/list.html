@@ -62,6 +62,7 @@
     </tbody>
 </table>
 </div>
-<div class="box-footer clearfix">
+<div class="box-footer clearfix" ng-if="showPages">
     <paginator url="/#!/pacientes" pages="{{ pages }}"></paginator>
+    {{ pages }} - {{ showPages }}
 </div>
