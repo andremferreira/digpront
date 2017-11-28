@@ -45,11 +45,13 @@
     </thead>
     <tbody>
         <tr ng-repeat="consultas in paciente.consultas">
-            <td><td-fmt-date text="{{:: consultas.dataConsulta }}"></td-fmt-date></td>
+            <td>
+                <td-fmt-date text="{{:: consultas.dataConsulta }}"></td-fmt-date>
+            </td>
             <td>{{:: consultas.queixa }}</td>
             <td style="width:100px;">
-                <button class="btn btn-info" ng-click="verConsultaSelecionada(paciente)" style="padding:3px;">
-                    <i class="fa fa-eye"></i>
+                <button class="btn btn-info" ng-click="detalhesConsulta(paciente, $index)" style="padding:3px;">
+                    <i class="fa fa-file-powerpoint-o"></i>
                 </button>
                 <button class="btn bg-maroon " ng-click="dupliarConsulta(paciente)" style="padding:3px;">
                     <i class="fa fa-copy"></i>
@@ -62,8 +64,7 @@
     </tbody>
 </table>
 </div>
-<!-- <div class="box-footer clearfix">
-    <paginator url="/#!/pacienteCadastros" pages="{{ pages }}"></paginator>
-</div> -->
-<button class="btn btn-default" ng-click="cancel()">
-    <i class="fa fa-remove text-red"></i> Cancelar</button>
+<div class="box-footer clearfix">
+    <button class="btn btn-default" ng-click="cancel()">
+        <i class="fa fa-remove text-red"></i> Cancelar</button>
+</div>

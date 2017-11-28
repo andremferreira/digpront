@@ -244,6 +244,7 @@ function PacienteController($scope, $http, $filter, $location, $window, msgs, ta
     $scope.consulta.receitaMedica = $scope.paciente.consultas[index].receitaMedica
     tabs.show($scope, { tabFormConsultaAlterar: true })
   }
+ 
   $scope.showTabConsulta = function (paciente) {
     $scope.paciente = paciente
     tabs.show($scope, { tabConsulta: true })
@@ -282,5 +283,20 @@ function PacienteController($scope, $http, $filter, $location, $window, msgs, ta
     tabs.show($scope, { tabFormConsulta: true })
   }
 
+  $scope.detalhesConsulta = function(paciente, index, consulta) {
+    $scope.consulta = {}
+    $scope.consulta.index =  index
+    $scope.consulta.queixa = $scope.paciente.consultas[index].queixa
+    $scope.consulta.anamnese = $scope.paciente.consultas[index].anamnese
+    $scope.consulta.antecedente = $scope.paciente.consultas[index].antecedente
+    $scope.consulta.alergia = $scope.paciente.consultas[index].alergia
+    $scope.consulta.historicoFamiliar = $scope.paciente.consultas[index].historicoFamiliar
+    $scope.consulta.exameFisico = $scope.paciente.consultas[index].exameFisico
+    $scope.consulta.exameCompl = $scope.paciente.consultas[index].exameCompl
+    $scope.consulta.conduta = $scope.paciente.consultas[index].conduta
+    $scope.consulta.receitaMedica = $scope.paciente.consultas[index].receitaMedica
+    tabs.show($scope, { tabConsultaDetail: true })
+  }
+  
   $scope.getPacientes()
 }
