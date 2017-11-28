@@ -295,6 +295,7 @@ function PacienteController($scope, $http, $filter, $location, $window, msgs, ta
     $scope.consulta.exameCompl = $scope.paciente.consultas[index].exameCompl
     $scope.consulta.conduta = $scope.paciente.consultas[index].conduta
     $scope.consulta.receitaMedica = $scope.paciente.consultas[index].receitaMedica
+    $scope.consulta.dataConsulta = $filter('date')($scope.paciente.consultas[index].dataConsulta, 'dd/MM/yyyy HH:MM:ss')
     tabs.show($scope, { tabConsultaDetail: true })
   }
   
