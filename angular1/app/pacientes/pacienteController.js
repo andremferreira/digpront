@@ -19,45 +19,83 @@ function PacienteController($scope, $http, $filter, $location, $window, msgs, ta
   const page = parseInt($location.search().page) || 1
   const url = `${consts.apiUrl}/cadastroPacientes/${usr}/${limit}/${(page - 1) * limit}`
   const url2 = `${consts.apiUrl}/cadastroPacientesQtd/${usr}`
+  const nome = $location.search().nome || undefined
+  const sobrenome = $location.search().sobrenome || undefined
+  const limpar = $location.search().limpar || false
+  $scope.paciente = {}
+  $scope.paciente.nome = $location.search().nome || undefined
+  $scope.paciente.sobrenome = $location.search().sobrenome || undefined
+  //console.log($scope.paciente.nome , $scope.paciente.sobrenome)
+  if (!$location.search().nome || !$location.search().sobrenome) {
+    $scope.paciente.limpar = true
+  }else{
+    $scope.paciente.limpar = false
+  }
+  
   $scope.getPacientes = function () {
-    $http.get(`${url}`).then(function (resp) {
-      $scope.paciente = {}
-      $scope.pacientes = resp.data
-      $http.get(`${url2}`).then(function (resp) {
-        $scope.pages = Math.ceil(resp.data.value / limit)
-
-        if ( $scope.pages > 1 ){
-          $scope.showPages = true
-        } else {
-          $scope.showPages = false
-        }
-        tabs.show($scope, { tabList: true, tabCreate: true })
+    
+    if(nome || sobrenome) {
+      //console.log('dentro if filtro if' ,nome, sobrenome)
+      const url3 = `${consts.apiUrl}/cadastroPacientes/${usr}/${limit}/${(page - 1) * limit}/${nome}/${sobrenome}`
+      const url4 = `${consts.apiUrl}/cadastroPacientesQtd/${usr}/${nome}/${sobrenome}`
+      $http.get(`${url3}`).then(function (resp) {
+        $scope.paciente = {}
+        $scope.pacientes = resp.data
+        $http.get(`${url4}`).then(function (resp) {
+          $scope.pages = {}
+          $scope.pages = Math.ceil(resp.data.value / limit)
+          $scope.paciente.nome = $location.search().nome || undefined
+          $scope.paciente.sobrenome = $location.search().sobrenome || undefined
+          $scope.paciente.limpar = $location.search().limpar || undefined
+          tabs.show($scope, { tabList: true, tabCreate: true })
+        })
       })
-    })
+    } else if(($scope.paciente.nome || $scope.paciente.sobrenome) && !$scope.paciente.limpar == true){
+      console.log('dentro elseif filtro' ,$scope.paciente.nome, $scope.paciente.sobrenome)
+      var fil1 = $scope.paciente.nome
+      var fil2 = $scope.paciente.sobrenome
+      var fil3 = $scope.paciente.limpar
+      const url3 = `${consts.apiUrl}/cadastroPacientes/${usr}/${limit}/${(page - 1) * limit}/${fil1}/${fil2}`
+      const url4 = `${consts.apiUrl}/cadastroPacientesQtd/${usr}/${fil1}/${fil2}`
+      $http.get(`${url3}`).then(function (resp) {
+        $scope.paciente = {}
+        $scope.paciente.nome = fil1 || undefined
+        $scope.paciente.sobrenome = fil2 || undefined
+        $scope.paciente.limpar = fil3 || false
+        $scope.pacientes = resp.data
+        $http.get(`${url4}`).then(function (resp) {
+          $scope.pages = {}
+          $scope.pages = Math.ceil(resp.data.value / limit)
+          tabs.show($scope, { tabList: true, tabCreate: true })
+        })
+      })
+    } else {
+      console.log('dentro if filtro else' ,nome, sobrenome)
+      $http.get(`${url}`).then(function (resp) {
+        $scope.paciente = {}
+        $scope.pacientes = resp.data
+        $http.get(`${url2}`).then(function (resp) {
+          $scope.pages = Math.ceil(resp.data.value / limit)
+          $scope.paciente.nome = $location.search().nome
+          $scope.paciente.sobrenome = $location.search().sobrenome
+          $scope.paciente.limpar = false
+          tabs.show($scope, { tabList: true, tabCreate: true })
+        })
+      })
+    }
   }
 
-  $scope.filtrarPacientes = function () {
-    const usr = auth.getUser().medicoId
-    const limit = parseInt(5)
-    const page = parseInt($location.search().page) || 1
-    const url = `${consts.apiUrl}/cadastroPacientes/${usr}/${limit}/${(page - 1) * limit}/${$scope.paciente.nome}/${$scope.paciente.sobrenome}`
-    const url2 = `${consts.apiUrl}/cadastroPacientesQtd/${usr}/${$scope.paciente.nome}/${$scope.paciente.sobrenome}`
-    console.log(url)
-    console.log(url2)
-    $http.get(`${url}`).then(function (resp) {
-      $scope.paciente = {}
-      $scope.pacientes = resp.data
-      $http.get(`${url2}`).then(function (resp) {
-        $scope.pages = {}
-        $scope.pages = Math.ceil(resp.data.value / limit)
-        if ( $scope.pages > 1 ){
-          $scope.showPages = true
-        } else {
-          $scope.showPages = false
-        }
-      })
-    })
+  $scope.limparFiltro = function(){
+    $location.search().sobrenome = undefined
+    $location.search().nome = undefined
+    $location.search().limpar = false
+    $scope.getPacientes()  
   }
+  
+  $scope.aplicarFiltro = function(){
+    //console.log('AplicarFiltro')
+    $scope.getPacientes()
+}  
 
   $scope.validar = function () {
     const emailRegex = /\S+@\S+\.\S+/
@@ -132,7 +170,7 @@ function PacienteController($scope, $http, $filter, $location, $window, msgs, ta
         msgs.addError('O atributo "Anamnese" é obrigatório. ')
         return false
        } else {
-        console.log($scope.consulta, $scope.consulta.index)
+        //console.log($scope.consulta, $scope.consulta.index)
         $scope.paciente.consultas.splice($scope.consulta.index, 1, $scope.consulta)
         return true
       }
@@ -176,7 +214,7 @@ function PacienteController($scope, $http, $filter, $location, $window, msgs, ta
   $scope.addFormConsulta = function () {
     if ($scope.validarConsulta()) {
       const url = `${consts.apiUrl}/cadastroPaciente/${$scope.paciente._id}`
-      console.log($scope.paciente)
+      //console.log($scope.paciente)
       $http.put(url, $scope.paciente).then(function (response) {
         $scope.showTabConsulta()
         $scope.paciente = response.data
@@ -240,7 +278,7 @@ function PacienteController($scope, $http, $filter, $location, $window, msgs, ta
 
   $scope.editarConsulta = function(paciente, index, consulta) {
     $scope.consulta = {}
-    $scope.consulta.index =  index
+    $scope.consulta.index = index
     $scope.consulta.queixa = $scope.paciente.consultas[index].queixa
     $scope.consulta.anamnese = $scope.paciente.consultas[index].anamnese
     $scope.consulta.antecedente = $scope.paciente.consultas[index].antecedente
@@ -264,7 +302,7 @@ function PacienteController($scope, $http, $filter, $location, $window, msgs, ta
   }
 
   $scope.cancel = function () {
-    $scope.paciente = {}
+    $scope.limparFiltro()  
     tabs.show($scope, { tabCreate: true, tabList: true })
   }
 
@@ -288,6 +326,22 @@ function PacienteController($scope, $http, $filter, $location, $window, msgs, ta
   $scope.showTabConsultaForm = function (paciente) {
     $scope.paciente = paciente
     tabs.show($scope, { tabFormConsulta: true })
+  }
+
+  $scope.detalhesConsulta = function(paciente, index, consulta) {
+    $scope.consulta = {}
+    $scope.consulta.index =  index
+    $scope.consulta.queixa = $scope.paciente.consultas[index].queixa
+    $scope.consulta.anamnese = $scope.paciente.consultas[index].anamnese
+    $scope.consulta.antecedente = $scope.paciente.consultas[index].antecedente
+    $scope.consulta.alergia = $scope.paciente.consultas[index].alergia
+    $scope.consulta.historicoFamiliar = $scope.paciente.consultas[index].historicoFamiliar
+    $scope.consulta.exameFisico = $scope.paciente.consultas[index].exameFisico
+    $scope.consulta.exameCompl = $scope.paciente.consultas[index].exameCompl
+    $scope.consulta.conduta = $scope.paciente.consultas[index].conduta
+    $scope.consulta.receitaMedica = $scope.paciente.consultas[index].receitaMedica
+    $scope.consulta.dataConsulta = $filter('date')($scope.paciente.consultas[index].dataConsulta, 'dd/MM/yyyy HH:MM:ss')
+    tabs.show($scope, { tabConsultaDetail: true })
   }
 
   $scope.getPacientes()

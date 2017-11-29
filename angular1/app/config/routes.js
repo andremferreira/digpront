@@ -6,25 +6,28 @@ angular.module('primeiraApp').config([
     $stateProvider.state('welcome', {
       url: "/welcome",
       templateUrl: "welcome/welcome.html"
-    }).state('billingCycle', {
+    })
+    .state('billingCycle', {
       url: "/billingCycles?page",
       templateUrl: "billingCycle/tabs.html"
-    }).state('dashboard', {
+    })
+    .state('dashboard', {
       url: "/dashboard?page",
       templateUrl: "dashboard/tabs.html"
-    }).state('pacientes', {
+    })
+    .state('pacientes', {
       url: "/pacientes?page",
       templateUrl: "pacientes/tabs.html"
-    }).state('contato', {
+    })
+    .state('contato', {
       url: "/contato",
       templateUrl: "contato/contato.html"
-    }).state('consulta', {
-      url: "/consulta",
-      templateUrl: "consulta/consulta.html"
-    }).state('fila', {
+    })
+    .state('fila', {
       url: "/fila",
       templateUrl: "fila/fila.html"
-    }).state('meuPerfil', {
+    })
+    .state('meuPerfil', {
       url: "/meuPerfil",
       templateUrl: "meuPerfil/tabs.html"
     })
@@ -57,7 +60,7 @@ angular.module('primeiraApp').config([
             } else {
               user.isValid = true
               $http.defaults.headers.common.Authorization = user.token
-              isAuthPage ? $window.location.href = '/' : $location.path('/welcome')
+              isAuthPage ? $window.location.href = '/' : $location.path()
             }
           })
         }
