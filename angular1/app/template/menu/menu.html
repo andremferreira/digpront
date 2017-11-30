@@ -1,27 +1,33 @@
 <section class="sidebar">
 	<div class="user-panel" ng-include="'/template/menu/user.html'" ng-controller="AuthCtrl as auth"></div>
 	<!-- div ng-include="'/template/menu/searchForm.html'"></div -->
-	<ul class="sidebar-menu">
-		<li class="header" style="background-color: white;"><b><i class="fa fa-home text-red" style="font-size: 20px;"></i> MENU PRINCIPAL</b></li>
-			<li>
-				<a ui-sref="meuPerfil">
-					<i class="fa fa-user-md"></i>
-					<span>Meu Perfil</span>
-				</a>
-			</li>
-			<li>
-				<a ui-sref="pacientes">
-					<i class="fa fa-address-book-o"></i>
-					<span>Paciente</span>
-				</a>
-			</li>
-			<li>
-					<a ui-sref="fila">
-						<i class="fa fa-list-ol"></i>
-						<span>Fila de Atendimento</span>
-					</a>
-			</li>
-		<li class="header" style="background-color: white;"><b><i class="fa fa-calculator text-red" style="font-size: 16px;"></i> CONTROLE</b></li>
+	<ul class="sidebar-menu" ng-controller="MenuCtrl as menu">
+		<li class="header" style="background-color: white;">
+			<b>
+				<i class="fa fa-home text-red" style="font-size: 20px;"></i> MENU PRINCIPAL</b>
+		</li>
+		<li>
+			<a ui-sref="meuPerfil">
+				<i class="fa fa-user-md"></i>
+				<span>Meu Perfil</span>
+			</a>
+		</li>
+		<li>
+			<a ui-sref="pacientes">
+				<i class="fa fa-address-book-o"></i>
+				<span>Paciente</span>
+			</a>
+		</li>
+		<li>
+			<a ui-sref="fila">
+				<i class="fa fa-list-ol"></i>
+				<span>Fila de Atendimento</span>
+			</a>
+		</li>
+		<li class="header" style="background-color: white;">
+			<b>
+				<i class="fa fa-calculator text-red" style="font-size: 16px;"></i> CONTROLE</b>
+		</li>
 		<li class="treeview">
 			<a href>
 				<i class="fa fa-money"></i>
@@ -41,11 +47,25 @@
 				</li>
 			</ul>
 		</li>
-		<li class="header" style="background-color: white;" ><b><i class="fa fa-question-circle text-red" style="font-size: 16px;"></i><b> AJUDA</b></li>
+		<li class="header" style="background-color: white;">
+			<b>
+				<i class="fa fa-question-circle text-red" style="font-size: 16px;"></i>
+				<b> AJUDA</b>
+		</li>
 		<li>
 			<a ui-sref="contato">
 				<i class="fa fa-envelope"></i>
 				<span>Contato</span>
+			</a>
+		</li>
+		<li ng-if="menu.mini" align="right">
+			<a href="" class="ng-scope" data-toggle="offcanvas" style="background-color: rgb(4, 59, 55);" role="button" ng-click="menu.menuMinify()">
+				<i class="fa fa-arrow-circle-left hit" style="vertical-align:middle;"></i>
+			</a>
+		</li>
+		<li ng-if="!menu.mini">
+			<a href="" class="ng-scope" data-toggle="offcanvas" style="background-color: rgb(4, 59, 55);" role="button" ng-click="menu.menuMinify()">
+				<i class="fa fa-arrow-circle-right hit" style="vertical-align:middle;"></i>
 			</a>
 		</li>
 	</ul>

@@ -36,7 +36,12 @@
                 <a href data-target="#tabConsultaDetail" data-toggle="tab">
                     <i class="fa fa-file-powerpoint-o"></i> Prontuário
                 </a>
-        </li>            
+            </li>
+            <li ng-if="tabFormConsultaDpl" ng-class="{active: tabFormConsultaDpl}">
+                <a href data-target="#tabConsultaDetail" data-toggle="tab">
+                    <i class="fa fa fa-file-text"></i> Prontuário
+                </a>
+            </li>
         </ul>
         <div class="tab-content">
             <div class="tab-pane" 
@@ -72,6 +77,11 @@
                 id="tabConsultaDetail"
                 ng-if="tabConsultaDetail" 
                 ng-class="{active: tabConsultaDetail}"
-                ng-include="'pacientes/consultaDetail.html'"></div>                
+                ng-include="'pacientes/consultaDetail.html'"></div>
+            <div class="tab-pane" 
+                id="tabFormConsultaDpl"
+                ng-if="tabFormConsultaDpl" 
+                ng-class="{active: tabFormConsultaDpl}"
+                ng-include="'pacientes/formConsultaEd.html'"></div>                         
         </div>
 </section>

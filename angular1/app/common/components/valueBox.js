@@ -16,11 +16,11 @@ angular.module('primeiraApp').component('valueBox', {
   <div class="{{ $ctrl.gridClasses }}">
     <div class="small-box {{ $ctrl.colorClass }}">
       <div class="inner">
-        <h3>{{ $ctrl.value }}</h3>
+        <h4><b>{{ $ctrl.value }}</b></h4>
         <p>{{ $ctrl.text }}</p>
       </div>
       <div class="icon">
-        <i class="{{ $ctrl.iconClass }}"></i>
+        <h1><i class="{{ $ctrl.iconClass }}"></i></h1>
       </div>
     </div>
   </div>

@@ -8,6 +8,7 @@ angular.module('primeiraApp').factory('tabs', [ function() {
       tabConsulta = false,
       tabFormConsulta = false,
       tabFormConsultaAlterar = false,
+      tabFormConsultaDpl = false,
       tabConsultaDetail = false,
    }) {
       owner.tabList = tabList
@@ -17,6 +18,7 @@ angular.module('primeiraApp').factory('tabs', [ function() {
       owner.tabConsulta = tabConsulta
       owner.tabFormConsulta = tabFormConsulta
       owner.tabFormConsultaAlterar = tabFormConsultaAlterar
+      owner.tabFormConsultaDpl = tabFormConsultaDpl
       owner.tabConsultaDetail = tabConsultaDetail
    }
 

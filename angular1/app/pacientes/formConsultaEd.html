@@ -220,6 +220,8 @@
         <div class="box-footer">
             <button class="btn btn-info" ng-click="editFormConsulta(paciente, index, consulta)" ng-if="tabFormConsultaAlterar">
                 <i class="fa fa-pencil"></i>Alterar</button>
+            <button class="btn bg-maroon" ng-click="editFormConsultaDpl(paciente, index, consulta)" ng-if="tabFormConsultaDpl">
+                <i class="fa fa-copy"></i> Duplicar Dados da Consulta</button>                
             <button class="btn btn-default" ng-click="cancelConsulta(paciente)" index="12">
                 <i class="fa fa-remove text-red"></i> Cancelar</button>
         </div>

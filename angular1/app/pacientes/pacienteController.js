@@ -51,7 +51,7 @@ function PacienteController($scope, $http, $filter, $location, $window, msgs, ta
         })
       })
     } else if(($scope.paciente.nome || $scope.paciente.sobrenome) && !$scope.paciente.limpar == true){
-      console.log('dentro elseif filtro' ,$scope.paciente.nome, $scope.paciente.sobrenome)
+      //console.log('dentro elseif filtro' ,$scope.paciente.nome, $scope.paciente.sobrenome)
       var fil1 = $scope.paciente.nome
       var fil2 = $scope.paciente.sobrenome
       var fil3 = $scope.paciente.limpar
@@ -70,7 +70,7 @@ function PacienteController($scope, $http, $filter, $location, $window, msgs, ta
         })
       })
     } else {
-      console.log('dentro if filtro else' ,nome, sobrenome)
+      //console.log('dentro if filtro else' ,nome, sobrenome)
       $http.get(`${url}`).then(function (resp) {
         $scope.paciente = {}
         $scope.pacientes = resp.data
@@ -177,14 +177,39 @@ function PacienteController($scope, $http, $filter, $location, $window, msgs, ta
     }
   }
 
+  $scope.validarConsultaDpl = function (paciente, index, consulta ) {
+    var consult = {}
+    if (consult) {
+      if (!$scope.consulta.queixa || !$scope.consulta.queixa.length) {
+        msgs.addError('O atributo "Queixa" é obrigatório. ')
+        return false
+      } else if (!$scope.consulta.anamnese || !$scope.consulta.anamnese.length) {
+        msgs.addError('O atributo "Anamnese" é obrigatório. ')
+        return false
+       } else {
+        //console.log($scope.consulta, $scope.consulta.index)
+        $scope.paciente.consultas.push($scope.consulta)
+        return true
+      }
+    }
+  }
+
   $scope.createPaciente = function () {
     const url = `${consts.apiUrl}/cadastroPaciente`
     $scope.paciente.medicoId = auth.getUser().medicoId
     $http.post(url, $scope.paciente).then(function (response) {
+      // var paciente_nome = $scope.paciente.nome
+      // var paciente_sobrenome = $scope.paciente.sobrenome
       $scope.paciente = {}
       $scope.getPacientes()
       msgs.addSuccess('Operação realizada com sucesso!!')
-      tabs.show($scope, { tabList: true, tabCreate: true })
+      // if ($scope.consulta.check){
+      //   console.log('Entrou:', $scope.consulta.check)
+      //   $location = `#!/pacientes?page&nome=${$paciente_nome}&sobrenome=${$paciente_sobrenome}`
+      // }else{
+        tabs.show($scope, { tabList: true, tabCreate: true })
+      // }
+      
     }).catch(function (resp) {
       msgs.addError(resp.data.errors)
     })
@@ -238,34 +263,56 @@ function PacienteController($scope, $http, $filter, $location, $window, msgs, ta
     }
   }
 
+  $scope.editFormConsultaDpl = function () {
+    if ($scope.validarConsultaDpl()) {
+      const url = `${consts.apiUrl}/cadastroPaciente/${$scope.paciente._id}`
+      $http.put(url, $scope.paciente).then(function (response) {
+        $scope.showTabConsulta()
+        $scope.paciente = response.data
+        msgs.addSuccess('Operação realizada com sucesso!')
+      }).catch(function (resp) {
+        msgs.addError(resp.data.errors)
+      })
+    }
+  }
+
   $scope.limpar = function (campo) {
     switch (campo) {
       case 'queixa':
         $scope.paciente.consultas.queixa = null;
+        $scope.consulta.queixa = null;
         break;
       case 'anamnese':
         $scope.paciente.consultas.anamnese = null;
+        $scope.consulta.anamnese = null;
         break;
       case 'antecedente':
         $scope.paciente.consultas.antecedente = null;
+        $scope.consulta.antecedente = null;
         break;
       case 'alergia':
         $scope.paciente.consultas.alergia = null;
+        $scope.consulta.alergia = null;
         break;
       case 'historicoFamiliar':
         $scope.paciente.consultas.historicoFamiliar = null;
+        $scope.consulta.historicoFamiliar = null;
         break;
       case 'exameFisico':
         $scope.paciente.consultas.exameFisico = null;
+        $scope.consulta.exameFisico = null;
         break;
       case 'exameCompl':
         $scope.paciente.consultas.exameCompl = null;
+        $scope.consulta.exameCompl = null;
         break;
       case 'conduta':
         $scope.paciente.consultas.conduta = null;
+        $scope.consulta.conduta = null;
         break;
       case 'receitaMedica':
         $scope.paciente.consultas.receitaMedica = null;
+        $scope.consulta.receitaMedica = null;
         break;
     }
   }
@@ -289,6 +336,21 @@ function PacienteController($scope, $http, $filter, $location, $window, msgs, ta
     $scope.consulta.conduta = $scope.paciente.consultas[index].conduta
     $scope.consulta.receitaMedica = $scope.paciente.consultas[index].receitaMedica
     tabs.show($scope, { tabFormConsultaAlterar: true })
+  }
+
+  $scope.duplicarConsulta = function(paciente, index, consulta) {
+    $scope.consulta = {}
+    $scope.consulta.index = index + 1
+    $scope.consulta.queixa = $scope.paciente.consultas[index].queixa
+    $scope.consulta.anamnese = $scope.paciente.consultas[index].anamnese
+    $scope.consulta.antecedente = $scope.paciente.consultas[index].antecedente
+    $scope.consulta.alergia = $scope.paciente.consultas[index].alergia
+    $scope.consulta.historicoFamiliar = $scope.paciente.consultas[index].historicoFamiliar
+    $scope.consulta.exameFisico = $scope.paciente.consultas[index].exameFisico
+    $scope.consulta.exameCompl = $scope.paciente.consultas[index].exameCompl
+    $scope.consulta.conduta = $scope.paciente.consultas[index].conduta
+    $scope.consulta.receitaMedica = $scope.paciente.consultas[index].receitaMedica
+    tabs.show($scope, { tabFormConsultaDpl: true })
   }
 
   $scope.showTabConsulta = function (paciente) {

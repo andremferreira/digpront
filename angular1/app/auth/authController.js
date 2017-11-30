@@ -7,7 +7,7 @@
         AuthController
     ])
 
-    function AuthController($location, msgs, auth) {
+    function AuthController( $location, msgs, auth) {
         const vm = this
 
         vm.loginMode = true
@@ -28,5 +28,19 @@
             auth.logout(() => $location.path('/'))
         }
 
+   
+    auth.changeMinfy = function(){
+        console.log('chamou')
+        $scope.show = a
+            if ($scope.show){
+                $scope.show = false
+                console.log('false', $scope.show)
+                
+            }else{
+                $scope.show = true
+                console.log('true', $scope.show)
+            }
+        return $scope.show
+        } 
     }
 })()
