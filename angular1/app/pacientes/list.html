@@ -2,11 +2,16 @@
     <form>
         <div role="form">
             <div class="box box-primary">
-                <div class="box-header with-border">
+                <div class="box-header with-border" ng-controller="PacienteCtrl as ctrl">
                     <h3 class="box-title">
                         <i class="fa fa-magic text-blue"></i> Filtar
-                        <small> - Pacientes</small>
+                        <small> - Pacientes </small>
                     </h3>
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                            <i class="fa fa-minus text-info"></i>
+                        </button>
+                    </div>
                 </div>
                 <div class="box-body">
                     <field label-style="text-transform: capitalize;" id="pacienteNome" label="Nome" model="paciente.nome" placeholder="Informe o Nome"

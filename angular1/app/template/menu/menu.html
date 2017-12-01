@@ -58,12 +58,12 @@
 				<span>Contato</span>
 			</a>
 		</li>
-		<li ng-if="menu.mini" align="right">
+		<li ng-if="menu.mini==true" align="right">
 			<a href="" class="ng-scope" data-toggle="offcanvas" style="background-color: rgb(4, 59, 55);" role="button" ng-click="menu.menuMinify()">
-				<i class="fa fa-arrow-circle-left hit" style="vertical-align:middle;"></i>
+				<i class="fa fa-arrow-circle-left hit" style="vertical-align:middle;"></i> 
 			</a>
 		</li>
-		<li ng-if="!menu.mini">
+		<li ng-if="!menu.mini==true">
 			<a href="" class="ng-scope" data-toggle="offcanvas" style="background-color: rgb(4, 59, 55);" role="button" ng-click="menu.menuMinify()">
 				<i class="fa fa-arrow-circle-right hit" style="vertical-align:middle;"></i>
 			</a>

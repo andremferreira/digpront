@@ -25,16 +25,16 @@ function PacienteController($scope, $http, $filter, $location, $window, msgs, ta
   $scope.paciente = {}
   $scope.paciente.nome = $location.search().nome || undefined
   $scope.paciente.sobrenome = $location.search().sobrenome || undefined
-  //console.log($scope.paciente.nome , $scope.paciente.sobrenome)
+    //console.log($scope.paciente.nome , $scope.paciente.sobrenome)
   if (!$location.search().nome || !$location.search().sobrenome) {
     $scope.paciente.limpar = true
-  }else{
+  } else {
     $scope.paciente.limpar = false
   }
-  
+
   $scope.getPacientes = function () {
-    
-    if(nome || sobrenome) {
+
+    if (nome || sobrenome) {
       //console.log('dentro if filtro if' ,nome, sobrenome)
       const url3 = `${consts.apiUrl}/cadastroPacientes/${usr}/${limit}/${(page - 1) * limit}/${nome}/${sobrenome}`
       const url4 = `${consts.apiUrl}/cadastroPacientesQtd/${usr}/${nome}/${sobrenome}`
@@ -50,7 +50,7 @@ function PacienteController($scope, $http, $filter, $location, $window, msgs, ta
           tabs.show($scope, { tabList: true, tabCreate: true })
         })
       })
-    } else if(($scope.paciente.nome || $scope.paciente.sobrenome) && !$scope.paciente.limpar == true){
+    } else if (($scope.paciente.nome || $scope.paciente.sobrenome) && !$scope.paciente.limpar == true) {
       //console.log('dentro elseif filtro' ,$scope.paciente.nome, $scope.paciente.sobrenome)
       var fil1 = $scope.paciente.nome
       var fil2 = $scope.paciente.sobrenome
@@ -85,17 +85,17 @@ function PacienteController($scope, $http, $filter, $location, $window, msgs, ta
     }
   }
 
-  $scope.limparFiltro = function(){
+  $scope.limparFiltro = function () {
     $location.search().sobrenome = undefined
     $location.search().nome = undefined
     $location.search().limpar = false
-    $scope.getPacientes()  
+    $scope.getPacientes()
   }
-  
-  $scope.aplicarFiltro = function(){
+
+  $scope.aplicarFiltro = function () {
     //console.log('AplicarFiltro')
     $scope.getPacientes()
-}  
+  }
 
   $scope.validar = function () {
     const emailRegex = /\S+@\S+\.\S+/
@@ -160,7 +160,7 @@ function PacienteController($scope, $http, $filter, $location, $window, msgs, ta
     }
   }
 
-  $scope.validarConsultaEdit = function (paciente, index, consulta ) {
+  $scope.validarConsultaEdit = function (paciente, index, consulta) {
     var consult = {}
     if (consult) {
       if (!$scope.consulta.queixa || !$scope.consulta.queixa.length) {
@@ -169,7 +169,7 @@ function PacienteController($scope, $http, $filter, $location, $window, msgs, ta
       } else if (!$scope.consulta.anamnese || !$scope.consulta.anamnese.length) {
         msgs.addError('O atributo "Anamnese" é obrigatório. ')
         return false
-       } else {
+      } else {
         //console.log($scope.consulta, $scope.consulta.index)
         $scope.paciente.consultas.splice($scope.consulta.index, 1, $scope.consulta)
         return true
@@ -177,7 +177,7 @@ function PacienteController($scope, $http, $filter, $location, $window, msgs, ta
     }
   }
 
-  $scope.validarConsultaDpl = function (paciente, index, consulta ) {
+  $scope.validarConsultaDpl = function (paciente, index, consulta) {
     var consult = {}
     if (consult) {
       if (!$scope.consulta.queixa || !$scope.consulta.queixa.length) {
@@ -186,7 +186,7 @@ function PacienteController($scope, $http, $filter, $location, $window, msgs, ta
       } else if (!$scope.consulta.anamnese || !$scope.consulta.anamnese.length) {
         msgs.addError('O atributo "Anamnese" é obrigatório. ')
         return false
-       } else {
+      } else {
         //console.log($scope.consulta, $scope.consulta.index)
         $scope.paciente.consultas.push($scope.consulta)
         return true
@@ -207,9 +207,9 @@ function PacienteController($scope, $http, $filter, $location, $window, msgs, ta
       //   console.log('Entrou:', $scope.consulta.check)
       //   $location = `#!/pacientes?page&nome=${$paciente_nome}&sobrenome=${$paciente_sobrenome}`
       // }else{
-        tabs.show($scope, { tabList: true, tabCreate: true })
+      tabs.show($scope, { tabList: true, tabCreate: true })
       // }
-      
+
     }).catch(function (resp) {
       msgs.addError(resp.data.errors)
     })
@@ -323,7 +323,7 @@ function PacienteController($scope, $http, $filter, $location, $window, msgs, ta
     tabs.show($scope, { tabUpdate: true })
   }
 
-  $scope.editarConsulta = function(paciente, index, consulta) {
+  $scope.editarConsulta = function (paciente, index, consulta) {
     $scope.consulta = {}
     $scope.consulta.index = index
     $scope.consulta.queixa = $scope.paciente.consultas[index].queixa
@@ -338,7 +338,7 @@ function PacienteController($scope, $http, $filter, $location, $window, msgs, ta
     tabs.show($scope, { tabFormConsultaAlterar: true })
   }
 
-  $scope.duplicarConsulta = function(paciente, index, consulta) {
+  $scope.duplicarConsulta = function (paciente, index, consulta) {
     $scope.consulta = {}
     $scope.consulta.index = index + 1
     $scope.consulta.queixa = $scope.paciente.consultas[index].queixa
@@ -358,13 +358,21 @@ function PacienteController($scope, $http, $filter, $location, $window, msgs, ta
     tabs.show($scope, { tabConsulta: true })
   }
 
+  $scope.showAdicionarLista = function (paciente) {
+    $scope.paciente = paciente
+    $scope.fila = {}
+    $scope.fila.dataFila = new Date()
+    tabs.show($scope, { tabPacienteFila: true })
+  }
+
   $scope.showTabCreate = function (paciente) {
     $scope.paciente = paciente
     tabs.show($scope, { tabUpdate: true, tabList: true })
   }
 
   $scope.cancel = function () {
-    $scope.limparFiltro()  
+    $scope.paciente = {}
+    $scope.limparFiltro()
     tabs.show($scope, { tabCreate: true, tabList: true })
   }
 
@@ -390,9 +398,9 @@ function PacienteController($scope, $http, $filter, $location, $window, msgs, ta
     tabs.show($scope, { tabFormConsulta: true })
   }
 
-  $scope.detalhesConsulta = function(paciente, index, consulta) {
+  $scope.detalhesConsulta = function (paciente, index, consulta) {
     $scope.consulta = {}
-    $scope.consulta.index =  index
+    $scope.consulta.index = index
     $scope.consulta.queixa = $scope.paciente.consultas[index].queixa
     $scope.consulta.anamnese = $scope.paciente.consultas[index].anamnese
     $scope.consulta.antecedente = $scope.paciente.consultas[index].antecedente
@@ -404,6 +412,24 @@ function PacienteController($scope, $http, $filter, $location, $window, msgs, ta
     $scope.consulta.receitaMedica = $scope.paciente.consultas[index].receitaMedica
     $scope.consulta.dataConsulta = $filter('date')($scope.paciente.consultas[index].dataConsulta, 'dd/MM/yyyy HH:MM:ss')
     tabs.show($scope, { tabConsultaDetail: true })
+  }
+
+  $scope.addFila = function (paciente, fila ) {
+    const url = `${consts.apiUrl}/fila`
+    $scope.fila.medicoId = $scope.paciente.medicoId
+    $scope.fila.pacienteId = $scope.paciente._id
+    $scope.fila.nome = $scope.paciente.nome
+    $scope.fila.sobrenome = $scope.paciente.sobrenome
+    $http.post(url, $scope.fila).then(function (response) {
+    $scope.fila = {}
+    $scope.paciente = {}
+    $scope.getPacientes()
+    msgs.addSuccess('Paciente adicionado na "Fila de Atendimento" com sucesso!')
+    tabs.show($scope, { tabList: true, tabCreate: true })
+
+    }).catch(function (resp) {
+      msgs.addError(resp.data.errors)
+    })
   }
 
   $scope.getPacientes()

@@ -327,7 +327,6 @@
                     <table>
                         <tr>
                             <td valign="top">
-                            
                                 <input type="checkbox" ng-model="consulta.check">
                             </td>
                             <td>
@@ -343,6 +342,9 @@
     <div class="box-footer">
         <button class="btn btn-info" ng-click="createPaciente()" ng-if="tabCreate"><i class="fa fa-check"></i> Incluir</button>
         <button class="btn btn-warning" ng-click="updatePaciente()" ng-if="tabUpdate"><i class="fa fa-pencil"></i> Alterar</button>
-        <button class="btn btn-default" ng-click="cancel()"><i class="fa fa-remove text-red"></i> Cancelar</button>
+        <!-- <button class="btn btn-default" ng-click="cancel()"><i class="fa fa-remove text-red"></i> Cancelar</button> -->
+        <a href="/#!/pacientes" class="btn btn-default" ng-click="cancel()">
+            <i class="fa fa-remove text-red"></i> Cancelar
+        </a>
     </div>
 </div>
