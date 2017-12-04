@@ -55,6 +55,11 @@ module.exports = function (server) {
     const filaService = require('../api/fila/filaService')
     filaService.register(protectedApi, '/fila')
 
+    const filaFilter = require('../api/fila/filaFilter')
+    protectedApi.route('/filaDia/:medico/:periodo').get(filaFilter.getFila)
+
+
+
 
 
 
