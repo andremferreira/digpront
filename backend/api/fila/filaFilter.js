@@ -1,10 +1,9 @@
 const _ = require('lodash')
 const Fila = require('./fila')
 const ObjectId = require('mongoose').Types.ObjectId
-const NumberInt = require('mongoose').Types.NumberInt
 
 function getFila(req, res, next) {
-    // console.log(req.params.periodo, req.params.medico)
+    //  console.log(req.params.periodo, req.params.medico)
 
     if (req.params.periodo && !req.params.periodo === "undefined") {
 
@@ -12,7 +11,7 @@ function getFila(req, res, next) {
         // console.log('perido 1:', dt)
         var d = parseInt(dt.getUTCDate())
         var m = parseInt(dt.getUTCMonth() + 1)
-        var y = dt.getFullYear()
+        var y = parseInt(dt.getFullYear())
 
     } else if (req.params.periodo === "undefined") {
         var dt2 = new Date()
@@ -20,6 +19,12 @@ function getFila(req, res, next) {
         var d = parseInt(dt2.getUTCDate())
         var m = parseInt(dt2.getUTCMonth() + 1)
         var y = parseInt(dt2.getFullYear())
+    }else{
+        var dt3 = new Date(req.params.periodo)
+        // console.log('perido 3:', dt3)
+        var d = parseInt(dt3.getUTCDate())
+        var m = parseInt(dt3.getUTCMonth()  + 1)
+        var y = parseInt(dt3.getFullYear())
     }
 
     // console.log('Dia:',d,' Mes:', m, 'Ano:',y)

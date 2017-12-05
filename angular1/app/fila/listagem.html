@@ -29,13 +29,9 @@
                         <div class="form-group">
                             <label>Filtrar</label>
                             <div class="form-group">
-                                <a href="/#!/pacientes?page&nome={{paciente.nome}}&sobrenome={{paciente.sobrenome}}&limpar=true" ng-if="!paciente.limpar"
-                                    ng-click="aplicarFiltro()" class="btn btn-primary">
+                                <button ng-click="aplFiltroFila()" class="btn btn-primary">
                                     <i class="fa fa-search "></i>
-                                </a>
-                                <a href="/#!/pacientes" ng-if="paciente.limpar" ng-click="limparFiltro()" class="btn btn-warning">
-                                    <i class="fa fa-times "></i>
-                                </a>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -57,7 +53,7 @@
         <tr ng-repeat="fila in filas">
             <td>{{ $index + 1 }} </td>
             <td>{{:: fila.nome }} {{:: fila.sobrenome }}</td>
-            <td>{{:: fila.atendido }}</td>
+            <td>{{:: fila.perm }}</td>
             <td style="width:100px;">
                 <table>
                     <tr>
