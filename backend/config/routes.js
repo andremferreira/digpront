@@ -57,6 +57,7 @@ module.exports = function (server) {
 
     const filaFilter = require('../api/fila/filaFilter')
     protectedApi.route('/filaDia/:medico/:periodo').get(filaFilter.getFila)
+    protectedApi.route('/filaQtd/:medico/:paciente/:periodo').get(filaFilter.getQtdFila)
 
 
 

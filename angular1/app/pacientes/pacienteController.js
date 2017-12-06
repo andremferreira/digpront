@@ -25,7 +25,7 @@ function PacienteController($scope, $http, $filter, $location, $window, msgs, ta
   $scope.paciente = {}
   $scope.paciente.nome = $location.search().nome || undefined
   $scope.paciente.sobrenome = $location.search().sobrenome || undefined
-    //console.log($scope.paciente.nome , $scope.paciente.sobrenome)
+  //console.log($scope.paciente.nome , $scope.paciente.sobrenome)
   if (!$location.search().nome || !$location.search().sobrenome) {
     $scope.paciente.limpar = true
   } else {
@@ -414,21 +414,50 @@ function PacienteController($scope, $http, $filter, $location, $window, msgs, ta
     tabs.show($scope, { tabConsultaDetail: true })
   }
 
-  $scope.addFila = function (paciente, fila ) {
+  //Adicionar paciente na fila de atendimento
+  $scope.addFila = function (paciente, fila) {
     const url = `${consts.apiUrl}/fila`
-    $scope.fila.medicoId = $scope.paciente.medicoId
-    $scope.fila.pacienteId = $scope.paciente._id
+    var medico = $scope.paciente.medicoId
+    var paciente = $scope.paciente._id
+    var periodo = $scope.fila.dataFila
+    const url2 = `${consts.apiUrl}/filaQtd/${medico}/${paciente}/${periodo}`
+    $scope.fila.medicoId = medico
+    $scope.fila.pacienteId = paciente
     $scope.fila.nome = $scope.paciente.nome
     $scope.fila.sobrenome = $scope.paciente.sobrenome
-    $http.post(url, $scope.fila).then(function (response) {
-    $scope.fila = {}
-    $scope.paciente = {}
-    $scope.getPacientes()
-    msgs.addSuccess('Paciente adicionado na "Fila de Atendimento" com sucesso!')
-    tabs.show($scope, { tabList: true, tabCreate: true })
+    $http.get(url2).then(function (resp) {
+      $scope.validacao = {}
+      $scope.validacao = resp.data
+      //Montar verificação de datas 
+      var dt4 = new Date($scope.fila.dataFila)
+      var d = parseInt(dt4.getUTCDate())
+      var m = parseInt(dt4.getUTCMonth() + 1)
+      var y = parseInt(dt4.getFullYear())
+      var valDt = y + m + d
+      var dt5 = new Date()
+      var d2 = parseInt(dt5.getUTCDate())
+      var m2 = parseInt(dt5.getUTCMonth() + 1)
+      var y2 = parseInt(dt5.getFullYear())
+      var valDt2 = y2 + m2 + d2
+      //Validar se o paciente existe ou se a data é valida
+      if (parseInt($scope.validacao.value) > 0) {
+        //Se o exister resultado não pode adicionar o paciente na fila de atendimento
+        msgs.addError('O paciente já foi adicionado na Fila para o perído informado.')
+      } else if(valDt < valDt2 ){
+        //Se período for menor que o dia atual não é permitido cadastrar paciente na fila
+        msgs.addError('O período não pode ser menor que a data atual.')
+      } else {
+        $http.post(url, $scope.fila).then(function (response) {
+          $scope.fila = {}
+          $scope.paciente = {}
+          $scope.getPacientes()
+          msgs.addSuccess('Paciente adicionado na "Fila de Atendimento" com sucesso!')
+          tabs.show($scope, { tabList: true, tabCreate: true })
 
-    }).catch(function (resp) {
-      msgs.addError(resp.data.errors)
+        }).catch(function (resp) {
+          msgs.addError(resp.data.errors)
+        })
+      }
     })
   }
 

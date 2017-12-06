@@ -19,11 +19,11 @@ function getFila(req, res, next) {
         var d = parseInt(dt2.getUTCDate())
         var m = parseInt(dt2.getUTCMonth() + 1)
         var y = parseInt(dt2.getFullYear())
-    }else{
+    } else {
         var dt3 = new Date(req.params.periodo)
         // console.log('perido 3:', dt3)
         var d = parseInt(dt3.getUTCDate())
-        var m = parseInt(dt3.getUTCMonth()  + 1)
+        var m = parseInt(dt3.getUTCMonth() + 1)
         var y = parseInt(dt3.getFullYear())
     }
 
@@ -60,4 +60,34 @@ function getFila(req, res, next) {
         })
 }
 
-module.exports = { getFila }
+function getQtdFila(req, res, next) {
+    var dt4 = new Date(req.params.periodo)
+    var d = parseInt(dt4.getUTCDate())
+    var m = parseInt(dt4.getUTCMonth() + 1)
+    var y = parseInt(dt4.getFullYear())
+
+    Fila.aggregate(
+        { $match: { medicoId: new ObjectId(req.params.medico),
+                    pacienteId: new ObjectId(req.params.paciente)}
+        },
+        {
+            $project: {
+                ano: { $year: "$dataFila" },
+                mes: { $month: "$dataFila" },
+                dia: { $dayOfMonth: "$dataFila" }
+            }
+        },
+        { $match: { ano: y, mes: m, dia: d }},
+        { $count: "value" }
+        , function (error, resp) {
+            if (error) {
+                res.status(500).json({ errors: [error] })
+            }
+             else {
+                res.json(resp[0])
+            }
+
+        })
+}
+
+module.exports = { getFila, getQtdFila }

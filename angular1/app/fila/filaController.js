@@ -58,6 +58,19 @@ angular.module('primeiraApp').controller('FilaCtrl', [
           msgs.addError(resp.data.errors)
         })
     }
+
+    $scope.delete = function (fila, $index) {
+      var dia = $scope.fila.dataFila
+      const url = `${consts.apiUrl}/fila/${fila._id}`
+      $http.delete(url).then(function (resp) {
+        $scope.fila = {}
+        $scope.fila.dataFila = dia
+        $scope.aplFiltroFila()
+        msgs.addSuccess('Operação realizada com sucesso!')
+      }).catch(function (resp) {
+        msgs.addError(resp.data.errors)
+      })
+  }
   
     $scope.getFila()
   }
