@@ -1,6 +1,6 @@
 (function () {
 
-    angular.module('primeiraApp').controller('AuthCtrl', [
+    angular.module('digPront').controller('AuthCtrl', [
         '$location',
         'msgs',
         'auth',

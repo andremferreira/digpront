@@ -1,4 +1,4 @@
-angular.module('primeiraApp').factory('formatDate', [function () {
+angular.module('digPront').factory('formatDate', [function () {
     function toFormatDate(string) {       
         let dt = new Date(string)
         let d = dt.getDate()

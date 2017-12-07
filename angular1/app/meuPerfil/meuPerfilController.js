@@ -1,4 +1,4 @@
-angular.module('primeiraApp').controller('MeuPerfilCtrl', [
+angular.module('digPront').controller('MeuPerfilCtrl', [
   '$scope',
   '$http',
   '$location',

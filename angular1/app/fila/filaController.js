@@ -1,4 +1,4 @@
-angular.module('primeiraApp').controller('FilaCtrl', [
+angular.module('digPront').controller('FilaCtrl', [
     '$scope',
     '$http',
     '$location',

@@ -1,4 +1,4 @@
-angular.module('primeiraApp').component('myButton', {
+angular.module('digPront').component('myButton', {
   bindings: {
     id: '@',
     label: '@',

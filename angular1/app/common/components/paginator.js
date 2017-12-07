@@ -1,4 +1,4 @@
-angular.module('primeiraApp').component('paginator', {
+angular.module('digPront').component('paginator', {
    bindings: {
      url: '@',
      pages: '<',

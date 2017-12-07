@@ -1,4 +1,4 @@
-angular.module('primeiraApp').component('tdFmtDate', {
+angular.module('digPront').component('tdFmtDate', {
     bindings: {
       style: '@',
       text: '@'

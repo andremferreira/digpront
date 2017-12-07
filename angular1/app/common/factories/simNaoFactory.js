@@ -1,4 +1,4 @@
-angular.module('primeiraApp').factory('filtro', [function () {
+angular.module('digPront').factory('filtro', [function () {
     function filtrarBoolean(boolean) {
         if(boolean){
             return 'SIM'

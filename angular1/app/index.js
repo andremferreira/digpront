@@ -1,4 +1,4 @@
-angular.module('primeiraApp', [
+angular.module('digPront', [
   'ui.router',
   'ngAnimate',
   'toastr'

@@ -1,4 +1,4 @@
-angular.module('primeiraApp').controller('BillingCycleCtrl', [
+angular.module('digPront').controller('BillingCycleCtrl', [
   '$scope',
   '$http',
   '$location',

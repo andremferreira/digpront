@@ -1,4 +1,4 @@
-angular.module('primeiraApp').config([
+angular.module('digPront').config([
   '$stateProvider',
   '$urlRouterProvider',
   '$httpProvider',

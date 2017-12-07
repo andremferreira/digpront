@@ -1,4 +1,4 @@
-angular.module('primeiraApp').controller('DashboardCtrl', [
+angular.module('digPront').controller('DashboardCtrl', [
   '$http',
   '$scope', 
   '$location',

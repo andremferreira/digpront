@@ -1,4 +1,4 @@
-angular.module('primeiraApp').component('field', {
+angular.module('digPront').component('field', {
   bindings: {
     id: '@',
     label: '@',

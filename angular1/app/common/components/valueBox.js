@@ -1,4 +1,4 @@
-angular.module('primeiraApp').component('valueBox', {
+angular.module('digPront').component('valueBox', {
   bindings: {
     grid: '@',
     colorClass: '@',

@@ -1,4 +1,4 @@
-angular.module('primeiraApp').controller('PacienteCtrl', [
+angular.module('digPront').controller('PacienteCtrl', [
   '$scope',
   '$http',
   '$filter',

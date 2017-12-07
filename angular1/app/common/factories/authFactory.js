@@ -1,6 +1,6 @@
 (function () {
 
-    angular.module('primeiraApp').factory('auth', [
+    angular.module('digPront').factory('auth', [
         '$http',
         'consts',
         AuthFactory

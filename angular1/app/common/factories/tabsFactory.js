@@ -1,4 +1,4 @@
-angular.module('primeiraApp').factory('tabs', [ function() {
+angular.module('digPront').factory('tabs', [ function() {
 
    function show(owner, {
       tabList = false,

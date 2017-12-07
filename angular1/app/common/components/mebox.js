@@ -1,4 +1,4 @@
-angular.module('primeiraApp').component('mebox', {
+angular.module('digPront').component('mebox', {
   bindings: {
     titulo: '@',
     titlep: '@',

@@ -1,4 +1,4 @@
-angular.module('primeiraApp').component('contentHeader', {
+angular.module('digPront').component('contentHeader', {
    bindings: {
       name: '@',
       small: '@',

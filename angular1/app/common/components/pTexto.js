@@ -1,4 +1,4 @@
-angular.module('primeiraApp').component('pTexto', {
+angular.module('digPront').component('pTexto', {
     bindings: {
        texto: '@',
        stlT: '@',

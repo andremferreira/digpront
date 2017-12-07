@@ -1,4 +1,4 @@
-angular.module('primeiraApp').factory('msgs', [
+angular.module('digPront').factory('msgs', [
   'toastr',
   MsgsFactory
 ])

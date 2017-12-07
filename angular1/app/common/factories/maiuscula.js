@@ -1,4 +1,4 @@
-angular.module('primeiraApp').factory('maiuscula', [function () {
+angular.module('digPront').factory('maiuscula', [function () {
     function maiuscula(string) {
         return string.toUpperCase()
     }

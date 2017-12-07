@@ -1,5 +1,5 @@
 (function () {
-    angular.module('primeiraApp').factory('handleResponseError', [
+    angular.module('digPront').factory('handleResponseError', [
         '$q',
         '$window',
         'consts',

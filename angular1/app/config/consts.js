@@ -1,4 +1,4 @@
-angular.module('primeiraApp').constant('consts', {
+angular.module('digPront').constant('consts', {
   appName: 'Excelência em Gestão de Pacientes.',
   version: '1.0',
   owner: 'Digital Prontuário',
